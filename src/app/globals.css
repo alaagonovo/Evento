@@ -49,6 +49,7 @@
     --radius-4xl: calc(var(--radius) * 2.6);
     --shadow-soft: 0 8px 30px -12px oklch(0.27 0.045 255 / 0.12);
     --shadow-lift: 0 18px 50px -18px oklch(0.27 0.045 255 / 0.22);
+    --animate-review-marquee: review-marquee 48s linear infinite;
 }
 
 :root {
@@ -171,4 +172,24 @@ html[lang="en"] :is(h1, h2, h3, h4, .font-heading) {
 
 @utility shadow-lift {
   box-shadow: var(--shadow-lift);
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+@keyframes review-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-review-marquee {
+    animation: none;
+    transform: none;
+  }
 }

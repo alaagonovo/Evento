@@ -2,12 +2,26 @@ export type UserRole = "customer" | "vendor" | "admin";
 export type VendorStatus = "pending" | "approved" | "rejected" | "suspended";
 export type VendorCategory =
   | "venue"
-  | "photographer"
-  | "planner"
-  | "makeup-artist"
+  | "bachelorette"
+  | "beauty-nails"
   | "caterer"
-  | "photo-location"
-  | "dress-rental";
+  | "dj"
+  | "entertainment"
+  | "favours-products"
+  | "florist"
+  | "hairdresser"
+  | "honeymoon"
+  | "makeup-artist"
+  | "media-coverage"
+  | "officiant"
+  | "photographer"
+  | "room-decoration"
+  | "transportation"
+  | "veil-designer"
+  | "videographer"
+  | "wedding-cake"
+  | "planner"
+  | "photo-location";
 export type DressKind = "wedding" | "engagement" | "soiree";
 export type EventType = "wedding" | "engagement" | "birthday" | "general";
 export type BookingStatus = "pending" | "confirmed" | "cancelled";

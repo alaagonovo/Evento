@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/database.types";
 import { asLocalized } from "../types/vendor";
 import type { VendorView } from "../types/vendor";
+import { haversineKm } from "../lib/geo";
 import {
   listVendorsInputSchema,
   mapVendorRow,
@@ -50,16 +51,32 @@ export async function listApprovedVendors(input: ListVendorsInput = {}): Promise
     .eq("is_approved", true)
     .order("avg_rating", { ascending: false });
 
-  if (parsed.category) {
-    query = query.eq("category", toDbCategory(parsed.category));
+  const categorySlugs = [
+    ...new Set([
+      ...(parsed.categories ?? []),
+      ...(parsed.category ? [parsed.category] : []),
+    ]),
+  ];
+
+  if (categorySlugs.length === 1) {
+    query = query.eq("category", toDbCategory(categorySlugs[0]));
+  } else if (categorySlugs.length > 1) {
+    query = query.in("category", categorySlugs.map(toDbCategory));
   }
 
-  if (parsed.city) {
+  const near =
+    parsed.lat != null && parsed.lng != null
+      ? { latitude: parsed.lat, longitude: parsed.lng }
+      : null;
+
+  if (parsed.city && !near) {
     query = query.ilike("city", `%${parsed.city}%`);
   }
 
-  if (parsed.limit) {
+  if (parsed.limit && !near) {
     query = query.limit(parsed.limit);
+  } else if (near) {
+    query = query.limit(48);
   }
 
   const { data, error } = await query;
@@ -68,9 +85,30 @@ export async function listApprovedVendors(input: ListVendorsInput = {}): Promise
     return [];
   }
 
-  return (data ?? [])
+  const vendors = (data ?? [])
     .map((row) => mapVendorRow(row))
     .filter((vendor): vendor is VendorView => vendor !== null);
+
+  if (!near) {
+    return vendors;
+  }
+
+  return vendors
+    .map((vendor) => {
+      if (vendor.latitude == null || vendor.longitude == null) {
+        return { ...vendor, distanceKm: Number.POSITIVE_INFINITY };
+      }
+
+      return {
+        ...vendor,
+        distanceKm: haversineKm(near, {
+          latitude: vendor.latitude,
+          longitude: vendor.longitude,
+        }),
+      };
+    })
+    .sort((left, right) => (left.distanceKm ?? Infinity) - (right.distanceKm ?? Infinity))
+    .slice(0, parsed.limit ?? 24);
 }
 
 export async function listFeaturedVendors(): Promise<VendorView[]> {

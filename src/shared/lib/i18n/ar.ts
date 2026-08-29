@@ -9,6 +9,7 @@ export const ar: Dictionary = {
   nav: {
     home: "الرئيسية",
     vendors: "المزوّدون",
+    reviews: "التقييمات",
     dashboard: "لوحة التحكم",
     bookings: "الحجوزات",
     profile: "الملف الشخصي",
@@ -31,14 +32,28 @@ export const ar: Dictionary = {
     heroEyebrow: "منصة المناسبات في مصر",
     heroTitle: "يومك يبدأ من اختيارٍ يطمئنك",
     heroSubtitle:
-      "قاعات، تصوير، تنظيم، فساتين وضيافة — مزوّدون موثوقون لحجز الأفراح والخطوبة والمناسبات في مكان واحد.",
-    searchCategory: "التخصص",
+      "قاعات، تصوير، زهور، ضيافة وكل تخصصات الفرح — مزوّدون موثوقون للمناسبات في مصر.",
+    searchCategory: "التخصصات",
+    searchCategoriesPlaceholder: "أي تخصص",
+    searchCategoriesHint: "اختاري تخصصًا أو أكثر",
+    searchCategoriesFilter: "ابحثي في التخصصات",
+    searchCategoriesEmpty: "لا توجد تخصصات مطابقة",
+    searchSelected: "مختارة",
+    searchClearCategories: "مسح الاختيار",
+    searchRemoveCategory: "إزالة",
+    searchAnyCity: "أي مدينة",
+    searchCurrentLocation: "موقعي الحالي",
+    searchLocating: "جارٍ تحديد موقعك…",
+    searchLocationDenied: "تعذّر قراءة موقعك. اسمحي بالوصول ثم حاولي مرة أخرى.",
     searchCity: "المدينة",
     searchDate: "التاريخ",
-    searchCta: "ابحثي",
+    searchCta: "ابحث",
     browseVendors: "تصفحي المزوّدين",
     categoriesHeading: "كل تفاصيل مناسبتك",
-    categoriesSubtitle: "سبعة تخصصات، ومقارنة هادئة قبل ما تتخذي القرار.",
+    categoriesSubtitle: "من القاعة لآخر تفصيلة — قارني واحجزي كل تخصصات الفرح.",
+    viewAll: "عرض الكل",
+    prevCategories: "التخصصات السابقة",
+    nextCategories: "التخصصات التالية",
     featuredHeading: "مزوّدون مميزون",
     featuredSubtitle: "اختيارات موثّقة ومحبوبة هذا الموسم — جاهزة للحجز.",
     featuredEmpty: "سيظهر المزوّدون المميزون هنا بعد اعتماد الحسابات.",
@@ -52,6 +67,9 @@ export const ar: Dictionary = {
     socialVendorsLabel: "مزوّد موثّق",
     socialCitiesValue: "18",
     socialCitiesLabel: "مدينة في مصر",
+    reviewsHeading: "كلام الأزواج",
+    reviewsSubtitle: "ملاحظات من أفراح اتحجزت على Evento — وكل تقييم مربوط بتخصصه.",
+    reviewCategory: "التخصص",
   },
   footer: {
     tagline: "حجوزات أنيقة للأفراح والمناسبات في مصر.",
@@ -73,29 +91,85 @@ export const ar: Dictionary = {
       title: "القاعات",
       description: "قاعات أفراح ومساحات مناسبات تُحجز حسب التاريخ.",
     },
-    photographers: {
-      title: "المصورون",
-      description: "تصوير فوتوغرافي وفيديو حسب الباقة.",
+    bachelorette: {
+      title: "حفلة الوداع",
+      description: "حفلات وأنشطة ليلة الوداع للعروس وصديقاتها.",
     },
-    planners: {
-      title: "منظّمو الأفراح",
-      description: "باقات تنظيم كاملة لمناسبتك.",
-    },
-    "makeup-artists": {
-      title: "خبراء التجميل",
-      description: "مكياج عرائس ومناسبات، مع إمكانية تجربة مسبقة.",
+    "beauty-nails": {
+      title: "التجميل والأظافر",
+      description: "عناية بالأظافر وسبا وتجميل قبل يوم الفرح.",
     },
     catering: {
-      title: "الشيفات والضيافة",
+      title: "الضيافة",
       description: "قوائم طعام بسعر للفرد، مع حد أدنى لعدد الضيوف.",
+    },
+    dj: {
+      title: "دي جي",
+      description: "موسيقى وإضاءة تخلّي الرقصة مستمرة طول الليل.",
+    },
+    entertainment: {
+      title: "الترفيه",
+      description: "فنانون وكابينة تصوير وفقرات حية للمناسبة.",
+    },
+    "favours-products": {
+      title: "الهدايا والمنتجات",
+      description: "هدايا الضيوف وتذكارات ومنتجات مخصّصة للمناسبة.",
+    },
+    florist: {
+      title: "منسقو الزهور",
+      description: "باقات وطاولات وتنسيق ورد ليوم الفرح.",
+    },
+    hairdresser: {
+      title: "مصففو الشعر",
+      description: "تسريحات عرائس ومناسبات، مع إمكانية تجربة مسبقة.",
+    },
+    honeymoon: {
+      title: "شهر العسل",
+      description: "باقات سفر ورحلات بعد الزفاف.",
+    },
+    "makeup-artists": {
+      title: "خبيرة التجميل",
+      description: "مكياج عرائس ومناسبات، مع إمكانية تجربة مسبقة.",
+    },
+    "media-coverage": {
+      title: "التغطية الإعلامية",
+      description: "تغطية صحفية وسوشيال ميديا ليوم المناسبة.",
+    },
+    officiant: {
+      title: "المأذون",
+      description: "من يدير عقد القران والطقوس الرسمية.",
+    },
+    photographers: {
+      title: "التصوير الفوتوغرافي",
+      description: "تغطية صور حسب الباقة.",
+    },
+    "room-decoration": {
+      title: "تنسيق القاعة",
+      description: "ديكور وقاعات وأجنحة واستقبال بلمسة متكاملة.",
+    },
+    transportation: {
+      title: "النقل",
+      description: "سيارات الزفاف ونقل الضيوف وترتيبات الوصول.",
+    },
+    "veil-designer": {
+      title: "مصممة الطرحة",
+      description: "طرح وإكسسوار رأس مخصّصة للعروس.",
+    },
+    videography: {
+      title: "تصوير الفيديو",
+      description: "أفلام وملخصات مصوّرة حسب الباقة.",
+    },
+    "wedding-cake": {
+      title: "تورتة الزفاف",
+      description: "تورته وطاولات حلويات مصمّمة للحفل.",
+    },
+    planners: {
+      title: "منظّمة الأفراح",
+      description: "باقات تنظيم كاملة لمناسبتك.",
     },
     "photo-locations": {
       title: "مواقع جلسات التصوير",
       description: "مواقع داخلية وخارجية تُحجز بالساعة.",
-    },
-    dresses: {
-      title: "تأجير الفساتين",
-      description: "فساتين زفاف وخطوبة وسهرة — إيجار أو شراء.",
     },
   },
   cities: {
@@ -114,6 +188,7 @@ export const ar: Dictionary = {
     price: "السعر",
     rating: "التقييم",
     allCategories: "كل التخصصات",
+    allCategoriesSubtitle: "تصفحي كل تخصصات الفرح وافتحي المزوّدين في كل تخصص.",
     empty: "سيظهر المزوّدون في هذا التخصص هنا بعد اعتماد الإدارة.",
   },
   vendor: {
@@ -124,6 +199,7 @@ export const ar: Dictionary = {
     book: "طلب حجز",
     bookNow: "احجزي الآن",
     fromPrice: "يبدأ من",
+    away: "منك",
     perEvent: "للمناسبة",
     perDay: "لليوم",
     verified: "موثّق",

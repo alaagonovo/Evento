@@ -5,6 +5,7 @@ import { StarRating } from "@/shared/components/star-rating";
 import { Badge } from "@/shared/components/ui/badge";
 import { cn, formatPrice, localized } from "@/shared/lib/utils";
 import { cityLabel } from "../lib/city-label";
+import { formatDistanceKm } from "../lib/geo";
 import { localizedPath, type Dictionary, type Locale } from "@/shared/lib/i18n";
 import type { VendorView } from "../types/vendor";
 
@@ -49,6 +50,11 @@ export function VendorCard({ vendor, locale, dictionary, className }: VendorCard
           <p className="inline-flex items-center gap-1 text-sm text-muted-foreground">
             <MapPin className="size-3.5" />
             {cityLabel(vendor.city, dictionary)} · {localized(vendor.neighborhood, locale)}
+            {vendor.distanceKm != null && Number.isFinite(vendor.distanceKm) ? (
+              <span className="text-gold">
+                · {formatDistanceKm(vendor.distanceKm, locale)} {dictionary.vendor.away}
+              </span>
+            ) : null}
           </p>
           <p className="mt-auto pt-2 text-sm">
             <span className="text-muted-foreground">{dictionary.vendor.fromPrice} </span>

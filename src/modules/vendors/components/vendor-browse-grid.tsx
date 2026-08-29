@@ -9,16 +9,22 @@ type VendorBrowseGridProps = {
   locale: Locale;
   dictionary: Dictionary;
   category?: VendorCategorySlug;
+  categories?: VendorCategorySlug[];
   city?: string;
+  lat?: number;
+  lng?: number;
 };
 
 export async function VendorBrowseGrid({
   locale,
   dictionary,
   category,
+  categories,
   city,
+  lat,
+  lng,
 }: VendorBrowseGridProps) {
-  const vendors = await listApprovedVendors({ category, city, limit: 24 });
+  const vendors = await listApprovedVendors({ category, categories, city, lat, lng, limit: 24 });
 
   if (vendors.length === 0) {
     return (

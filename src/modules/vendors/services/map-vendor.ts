@@ -2,6 +2,8 @@ import { z } from "zod";
 import type { Database, VendorCategory } from "@/lib/supabase/database.types";
 import { CATEGORY_IMAGES } from "../data/mock";
 import {
+  VENDOR_CATEGORY_SLUGS,
+  VENDOR_CATEGORY_TO_TYPE,
   VENDOR_TYPE_TO_CATEGORY,
   isVendorType,
   type VendorCategorySlug,
@@ -11,18 +13,11 @@ import { asLocalized, type VendorView } from "../types/vendor";
 type VendorRow = Database["public"]["Tables"]["vendors"]["Row"];
 
 export const listVendorsInputSchema = z.object({
-  category: z
-    .enum([
-      "venues",
-      "photographers",
-      "planners",
-      "makeup-artists",
-      "catering",
-      "photo-locations",
-      "dresses",
-    ])
-    .optional(),
+  category: z.enum(VENDOR_CATEGORY_SLUGS).optional(),
+  categories: z.array(z.enum(VENDOR_CATEGORY_SLUGS)).max(VENDOR_CATEGORY_SLUGS.length).optional(),
   city: z.string().trim().max(80).optional(),
+  lat: z.number().min(-90).max(90).optional(),
+  lng: z.number().min(-180).max(180).optional(),
   limit: z.number().int().min(1).max(48).optional(),
 });
 
@@ -31,17 +26,7 @@ export type ListVendorsInput = z.infer<typeof listVendorsInputSchema>;
 export const vendorIdSchema = z.string().uuid();
 
 export function toDbCategory(slug: VendorCategorySlug): VendorCategory {
-  const mapped = {
-    venues: "venue",
-    photographers: "photographer",
-    planners: "planner",
-    "makeup-artists": "makeup-artist",
-    catering: "caterer",
-    "photo-locations": "photo-location",
-    dresses: "dress-rental",
-  } as const satisfies Record<VendorCategorySlug, VendorCategory>;
-
-  return mapped[slug];
+  return VENDOR_CATEGORY_TO_TYPE[slug];
 }
 
 export function resolveImageUrl(src: string | null | undefined, fallback: string) {
@@ -99,5 +84,7 @@ export function mapVendorRow(
     reviews: extras?.reviews ?? [],
     capacity: extras?.capacity,
     sizes: extras?.sizes,
+    latitude: row.latitude,
+    longitude: row.longitude,
   };
 }

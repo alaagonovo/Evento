@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { Button } from "@/shared/components/ui/button";
+import { cn } from "@/shared/lib/utils";
 import {
   localeCookieName,
   locales,
@@ -28,23 +28,42 @@ export function LanguageSwitcher({ locale, labels }: LanguageSwitcherProps) {
   const router = useRouter();
 
   function setLocale(nextLocale: Locale) {
+    if (nextLocale === locale) return;
     writeLocaleCookie(nextLocale);
     router.push(replaceLocaleInPathname(pathname, nextLocale));
   }
 
+  function toggle() {
+    setLocale(locale === "ar" ? "en" : "ar");
+  }
+
   return (
-    <div className="flex items-center gap-1" role="group" aria-label={labels.switchTo}>
-      {locales.map((item) => (
-        <Button
-          key={item}
-          type="button"
-          size="sm"
-          variant={item === locale ? "default" : "ghost"}
-          onClick={() => setLocale(item)}
-        >
-          {labels[item]}
-        </Button>
-      ))}
+    <div
+      dir="ltr"
+      role="group"
+      aria-label={labels.switchTo}
+      className="inline-flex h-9 w-fit self-start items-center rounded-full border border-border bg-muted p-0.5"
+    >
+      {locales.map((item) => {
+        const active = item === locale;
+        return (
+          <button
+            key={item}
+            type="button"
+            aria-pressed={active}
+            aria-label={labels[item]}
+            onClick={() => (active ? toggle() : setLocale(item))}
+            className={cn(
+              "rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide transition-colors",
+              active
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {item === "en" ? "EN" : "AR"}
+          </button>
+        );
+      })}
     </div>
   );
 }

@@ -3,6 +3,7 @@
  * Import only from `@/modules/vendors`.
  */
 export { CategoryGrid, type CategoryCardItem } from "./components/category-grid";
+export { CategorySwiper } from "./components/category-swiper";
 export { FeaturedVendors } from "./components/featured-vendors";
 export { HeroSearch } from "./components/hero-search";
 export { HomeLanding } from "./components/home-landing";
@@ -28,6 +29,8 @@ export {
   getVendorByProfileId,
   listVendorsForAdmin,
 } from "./services/vendor-account";
+export { cityLabel } from "./lib/city-label";
+export { parseCategoryQuery } from "./lib/parse-search-query";
 export type { VendorView } from "./types/vendor";
 export {
   VENDOR_CATEGORY_SLUGS,

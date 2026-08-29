@@ -1,9 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/shared/components/ui/button";
 import { Container } from "@/shared/components/container";
 import { localizedPath, type Dictionary, type Locale } from "@/shared/lib/i18n";
 import { CATEGORY_IMAGES, HERO_IMAGE } from "../data/mock";
 import { VENDOR_CATEGORY_SLUGS } from "../types/category";
-import { CategoryGrid } from "./category-grid";
+import { CategorySwiper } from "./category-swiper";
 import { FeaturedVendors } from "./featured-vendors";
 import { HeroSearch } from "./hero-search";
 
@@ -70,7 +72,9 @@ export function HomeLanding({ locale, dictionary }: HomeLandingProps) {
               {dictionary.home.categoriesSubtitle}
             </p>
           </div>
-          <CategoryGrid
+          <CategorySwiper
+            locale={locale}
+            dictionary={dictionary}
             categories={VENDOR_CATEGORY_SLUGS.map((slug) => ({
               slug,
               title: dictionary.categories[slug].title,
@@ -78,6 +82,11 @@ export function HomeLanding({ locale, dictionary }: HomeLandingProps) {
               href: localizedPath(locale, `/vendors/${slug}`),
             }))}
           />
+          <div className="flex justify-center">
+            <Button asChild variant="outline" size="lg">
+              <Link href={localizedPath(locale, "/categories")}>{dictionary.home.viewAll}</Link>
+            </Button>
+          </div>
         </Container>
       </section>
 

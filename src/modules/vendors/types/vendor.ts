@@ -21,6 +21,9 @@ export type VendorView = {
   bookedDates: string[];
   reviews: VendorReview[];
   sizes?: string[];
+  latitude?: number | null;
+  longitude?: number | null;
+  distanceKm?: number;
 };
 
 export function asLocalized(value: string): LocalizedText {

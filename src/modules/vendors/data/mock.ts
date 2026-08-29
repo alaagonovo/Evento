@@ -69,12 +69,26 @@ export const HERO_IMAGE = unsplash("photo-1519741497674-611481863552", 2400);
 
 export const CATEGORY_IMAGES: Record<VendorCategorySlug, string> = {
   venues: unsplash("photo-1511795409834-ef04bbd61622", 1200),
-  photographers: unsplash("photo-1606800052052-a08af7148866", 1200),
-  planners: unsplash("photo-1464366400600-7168b8af9bc3", 1200),
-  "makeup-artists": unsplash("photo-1487412947147-5cebf100ffc2", 1200),
+  bachelorette: unsplash("photo-1519671482749-fd09be7ccebf", 1200),
+  "beauty-nails": unsplash("photo-1604654894610-df63bc536371", 1200),
   catering: unsplash("photo-1555244162-803834f70033", 1200),
+  dj: unsplash("photo-1470225620780-dba8ba36b745", 1200),
+  entertainment: unsplash("photo-1492684223066-81342ee5ff30", 1200),
+  "favours-products": unsplash("photo-1549465220-1a8b9238cd48", 1200),
+  florist: unsplash("photo-1526047932273-341f2a7631f9", 1200),
+  hairdresser: unsplash("photo-1560066984-138dadb4c035", 1200),
+  honeymoon: unsplash("photo-1573843981267-be1999ff37cd", 1200),
+  "makeup-artists": unsplash("photo-1487412947147-5cebf100ffc2", 1200),
+  "media-coverage": unsplash("photo-1478737270239-2f02b77fc618", 1200),
+  officiant: unsplash("photo-1465495976277-4387d4b0b4c6", 1200),
+  photographers: unsplash("photo-1606800052052-a08af7148866", 1200),
+  "room-decoration": unsplash("photo-1510076857177-7470076d4098", 1200),
+  transportation: unsplash("photo-1519641471654-76ce0107ad1b", 1200),
+  "veil-designer": unsplash("photo-1511285560929-80b456fea0bc", 1200),
+  videography: unsplash("photo-1492691527719-9d1e07e534b4", 1200),
+  "wedding-cake": unsplash("photo-1535254973040-607b474cb50d", 1200),
+  planners: unsplash("photo-1464366400600-7168b8af9bc3", 1200),
   "photo-locations": unsplash("photo-1519225421980-715cb0215aed", 1200),
-  dresses: unsplash("photo-1594552072238-b8a33785b261", 1200),
 };
 
 export const MOCK_VENDORS: MockVendor[] = [
@@ -186,102 +200,6 @@ export const MOCK_VENDORS: MockVendor[] = [
         },
       },
     ],
-  },
-  {
-    id: "ivory-atelier",
-    category: "dresses",
-    name: { ar: "أتيليه إيڤوري", en: "Ivory Atelier" },
-    city: "cairo",
-    neighborhood: { ar: "مصر الجديدة", en: "Heliopolis" },
-    startingPrice: 4500,
-    rating: 4.8,
-    reviewCount: 86,
-    verified: true,
-    featured: true,
-    coverImage: unsplash("photo-1594552072238-b8a33785b261", 1400),
-    description: {
-      ar: "فساتين زفاف وخطوبة بخامات هادئة وقصة تليق بالجسم. تجربة المقاس في الأتيليه، ثم استلام وإرجاع بمواعيد واضحة.",
-      en: "Wedding and engagement dresses in quiet fabrics and considered cuts. Fit in the atelier, then pick up and return on clear dates.",
-    },
-    highlights: [
-      { ar: "تعديل بسيط مشمول", en: "Minor alterations included" },
-      { ar: "تجربة في الأتيليه", en: "In-atelier fitting" },
-      { ar: "إيجار من 3 أيام", en: "Rentals from 3 days" },
-      { ar: "عناية وتنظيف بعد الإرجاع", en: "Cleaning after return" },
-    ],
-    gallery: [
-      {
-        src: unsplash("photo-1594552072238-b8a33785b261", 1800),
-        alt: { ar: "فستان زفاف إيڤوري من الأمام", en: "Ivory wedding dress, front view" },
-        angle: "front",
-      },
-      {
-        src: unsplash("photo-1566174053879-31528523f8ae", 1800),
-        alt: { ar: "تفاصيل الظهر والدانتيل", en: "Back and lace details" },
-        angle: "back",
-      },
-      {
-        src: unsplash("photo-1549417229-aa67d3263c09", 1800),
-        alt: { ar: "قصة جانبية للفستان", en: "Side silhouette of the dress" },
-        angle: "side",
-      },
-      {
-        src: unsplash("photo-1515372039744-b8f02a3ae446", 1800),
-        alt: { ar: "تفاصيل القماش والتطريز", en: "Fabric and embroidery details" },
-        angle: "detail",
-      },
-      {
-        src: unsplash("photo-1595777457583-95e059d581b8", 1800),
-        alt: { ar: "فستان خطوبة بلون شامبانيا", en: "Champagne engagement dress" },
-        angle: "front",
-      },
-    ],
-    packages: [
-      {
-        id: "rent-3",
-        name: { ar: "إيجار 3 أيام", en: "3-day rental" },
-        price: 4500,
-        unit: "event",
-        details: {
-          ar: "يشمل التجربة، تعديلات بسيطة، والتنظيف بعد الإرجاع.",
-          en: "Includes fitting, minor alterations, and cleaning after return.",
-        },
-      },
-      {
-        id: "rent-7",
-        name: { ar: "إيجار أسبوع", en: "7-day rental" },
-        price: 6200,
-        unit: "event",
-        details: {
-          ar: "مناسب لو التصوير والفرح مش في نفس اليوم.",
-          en: "Better when the photoshoot and wedding fall on different days.",
-        },
-      },
-    ],
-    bookedDates: ["2026-08-30", "2026-09-03", "2026-09-10", "2026-09-17", "2026-09-24"],
-    reviews: [
-      {
-        id: "d1",
-        author: { ar: "سلمى", en: "Salma" },
-        rating: 5,
-        date: { ar: "يوليو 2026", en: "July 2026" },
-        text: {
-          ar: "المقاس طلع مضبوط من أول تجربة، والقماش مش بيلمع زيادة. حسّيت الفستان غالي من غير مبالغة.",
-          en: "The size was right from the first fitting, and the fabric didn’t over-shine. It felt expensive without being loud.",
-        },
-      },
-      {
-        id: "d2",
-        author: { ar: "هدير", en: "Hadeer" },
-        rating: 4,
-        date: { ar: "أبريل 2026", en: "April 2026" },
-        text: {
-          ar: "تجربة المقاس كانت هادية والمواعيد واضحة. رجّعت الفستان من غير أي توتر.",
-          en: "The fitting felt unhurried and the dates were clear. Returning the dress was simple.",
-        },
-      },
-    ],
-    sizes: ["36", "38", "40", "42", "44", "46"],
   },
   {
     id: "lens-and-light",

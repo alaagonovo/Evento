@@ -1,6 +1,6 @@
 # Evento
 
-Marketplace for booking event services in Egypt (weddings, engagements, birthdays, and general events). Customers browse seven vendor specialties; vendors manage offerings, availability, and bookings; admins approve vendors.
+Marketplace for booking event services in Egypt (weddings, engagements, birthdays, and general events). Customers browse wedding vendor specialties; vendors manage offerings, availability, and bookings; admins approve vendors.
 
 ## Stack
 
@@ -24,12 +24,14 @@ Each domain lives under `src/modules/<name>/` with `components/`, `hooks/`, `ser
 | `users` | Profiles and roles (customer / vendor / admin) |
 | `vendors` | Shared vendor browse, detail, and base types |
 | `venues` | Date-based halls / event spaces |
-| `photographers` | Package-based photo/video |
+| `photographers` | Package-based photography |
 | `planners` | Planning packages |
 | `makeup-artists` | Services + optional trials |
 | `catering` | Per-person menus |
 | `photo-locations` | Hourly locations |
-| `dresses` | Size + fitting-to-return lock |
+
+Browse also lists florist, DJ, videography, wedding cake, transportation, and the other wedding specialties in `VENDOR_CATEGORY_SLUGS`. Dedicated modules land as those booking flows are built.
+
 | `bookings` | Unified booking + conflict prevention |
 | `reviews` | Ratings after completed bookings |
 | `messaging` | Booking threads (Realtime) |
@@ -55,7 +57,7 @@ Required env vars in `.env.local`:
 
 Auth confirmation and password-reset emails are sent by Supabase. Brand them as Evento with the HTML in `supabase/templates/` and custom SMTP (sender name `Evento`). See `supabase/templates/README.md`.
 
-After pulling SQL changes, re-run `supabase/auth.sql` in the Supabase SQL editor so `email_exists` is available and `dev@gonovo.tech` is promoted to admin (the Auth user for that email must already exist).
+After pulling SQL changes, re-run `supabase/auth.sql` in the Supabase SQL editor so `email_exists` is available and `dev@gonovo.tech` is promoted to admin (the Auth user for that email must already exist). Run `supabase/vendor-categories.sql` so new vendor specialties exist on the `vendor_category` enum.
 
 ## Scripts
 

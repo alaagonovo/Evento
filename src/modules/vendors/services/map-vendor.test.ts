@@ -40,16 +40,33 @@ describe("vendor mapping", () => {
   it("rejects unknown database categories", () => {
     const vendor = mapVendorRow({
       ...baseRow,
-      category: "florist" as Database["public"]["Tables"]["vendors"]["Row"]["category"],
+      category: "not-a-category" as Database["public"]["Tables"]["vendors"]["Row"]["category"],
     });
     expect(vendor).toBeNull();
+  });
+
+  it("rejects dress rental rows after the category was removed", () => {
+    const vendor = mapVendorRow({
+      ...baseRow,
+      category: "dress-rental" as Database["public"]["Tables"]["vendors"]["Row"]["category"],
+    });
+    expect(vendor).toBeNull();
+  });
+
+  it("maps a florist row onto the public category slug", () => {
+    const vendor = mapVendorRow({
+      ...baseRow,
+      category: "florist",
+    });
+    expect(vendor?.category).toBe("florist");
   });
 });
 
 describe("vendor query schemas", () => {
   it("maps browse slugs to database categories", () => {
-    expect(toDbCategory("dresses")).toBe("dress-rental");
     expect(toDbCategory("venues")).toBe("venue");
+    expect(toDbCategory("florist")).toBe("florist");
+    expect(toDbCategory("videography")).toBe("videographer");
   });
 
   it("accepts a uuid vendor id", () => {
@@ -58,5 +75,12 @@ describe("vendor query schemas", () => {
 
   it("rejects an invalid list payload", () => {
     expect(() => listVendorsInputSchema.parse({ limit: 0 })).toThrow();
+  });
+
+  it("accepts multiple browse categories", () => {
+    expect(listVendorsInputSchema.parse({ categories: ["venues", "florist"] }).categories).toEqual([
+      "venues",
+      "florist",
+    ]);
   });
 });

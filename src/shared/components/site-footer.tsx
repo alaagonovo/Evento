@@ -24,7 +24,7 @@ export function SiteFooter({ locale, dictionary }: SiteFooterProps) {
 
         <div>
           <h2 className="font-heading text-lg text-gold">{dictionary.footer.categories}</h2>
-          <ul className="mt-4 space-y-2.5 text-sm">
+          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
             {VENDOR_CATEGORY_SLUGS.map((slug) => (
               <li key={slug}>
                 <Link

@@ -7,6 +7,7 @@ export const en = {
   nav: {
     home: "Home",
     vendors: "Vendors",
+    reviews: "Reviews",
     dashboard: "Dashboard",
     bookings: "Bookings",
     profile: "Profile",
@@ -29,14 +30,29 @@ export const en = {
     heroEyebrow: "Egypt’s event marketplace",
     heroTitle: "Plan the day you’ll remember",
     heroSubtitle:
-      "Venues, photographers, planners, dresses, and catering — trusted vendors for weddings, engagements, and celebrations across Egypt.",
-    searchCategory: "Category",
+      "Venues, photography, florists, catering, and every wedding specialty — trusted vendors for celebrations across Egypt.",
+    searchCategory: "Categories",
+    searchCategoriesPlaceholder: "Any specialty",
+    searchCategoriesHint: "Select one or more",
+    searchCategoriesFilter: "Search specialties",
+    searchCategoriesEmpty: "No matching specialties",
+    searchSelected: "selected",
+    searchClearCategories: "Clear selection",
+    searchRemoveCategory: "Remove",
+    searchAnyCity: "Any city",
+    searchCurrentLocation: "Current location",
+    searchLocating: "Finding your location…",
+    searchLocationDenied: "Could not read your location. Allow access and try again.",
     searchCity: "City",
     searchDate: "Date",
     searchCta: "Search",
     browseVendors: "Browse vendors",
     categoriesHeading: "Every detail of your event",
-    categoriesSubtitle: "Seven specialties, one calm place to compare and book.",
+    categoriesSubtitle:
+      "From the venue to the last detail — compare and book every wedding specialty.",
+    viewAll: "View all",
+    prevCategories: "Previous categories",
+    nextCategories: "Next categories",
     featuredHeading: "Featured vendors",
     featuredSubtitle: "Loved by couples this season — verified, reviewed, ready to book.",
     featuredEmpty: "Featured vendors will appear here after accounts are approved.",
@@ -50,6 +66,9 @@ export const en = {
     socialVendorsLabel: "verified vendors",
     socialCitiesValue: "18",
     socialCitiesLabel: "cities across Egypt",
+    reviewsHeading: "What couples say",
+    reviewsSubtitle: "Notes from weddings booked on Evento — each one tagged by specialty.",
+    reviewCategory: "Category",
   },
   footer: {
     tagline: "Elegant bookings for weddings and celebrations in Egypt.",
@@ -71,29 +90,85 @@ export const en = {
       title: "Venues",
       description: "Wedding halls and event spaces booked by date.",
     },
-    photographers: {
-      title: "Photographers",
-      description: "Photo and video coverage booked by package.",
+    bachelorette: {
+      title: "Bachelorette",
+      description: "Parties, activities, and nights out for the bride and her friends.",
     },
-    planners: {
-      title: "Wedding Planners",
-      description: "Full planning packages for your event.",
-    },
-    "makeup-artists": {
-      title: "Makeup Artists",
-      description: "Bridal and event makeup, with optional trials.",
+    "beauty-nails": {
+      title: "Beauty & Nails",
+      description: "Bridal nails, spa, and beauty treatments before the day.",
     },
     catering: {
-      title: "Chefs / Catering",
+      title: "Catering",
       description: "Menus priced per guest, with a minimum headcount.",
+    },
+    dj: {
+      title: "DJ",
+      description: "Music, lighting, and a dance floor that keeps the night going.",
+    },
+    entertainment: {
+      title: "Entertainment",
+      description: "Artists, photobooths, and live acts for the celebration.",
+    },
+    "favours-products": {
+      title: "Favours & Products",
+      description: "Guest gifts, souvenirs, and custom event products.",
+    },
+    florist: {
+      title: "Florist",
+      description: "Bouquets, centerpieces, and floral design for the day.",
+    },
+    hairdresser: {
+      title: "Hairdresser",
+      description: "Bridal and party hairstyling, with optional trials.",
+    },
+    honeymoon: {
+      title: "Honeymoon",
+      description: "Travel packages and getaways after the wedding.",
+    },
+    "makeup-artists": {
+      title: "Makeup Artist",
+      description: "Bridal and event makeup, with optional trials.",
+    },
+    "media-coverage": {
+      title: "Media Coverage",
+      description: "Press, social, and event media coverage for the day.",
+    },
+    officiant: {
+      title: "Officiant",
+      description: "The person who leads the ceremony and legal vows.",
+    },
+    photographers: {
+      title: "Photography",
+      description: "Photo coverage booked by package.",
+    },
+    "room-decoration": {
+      title: "Room Decoration",
+      description: "Styling and décor for halls, suites, and reception rooms.",
+    },
+    transportation: {
+      title: "Transportation",
+      description: "Wedding cars, guest transfers, and arrival-day logistics.",
+    },
+    "veil-designer": {
+      title: "Veil designer",
+      description: "Custom veils and headpieces for the bride.",
+    },
+    videography: {
+      title: "Videography",
+      description: "Films and highlight reels booked by package.",
+    },
+    "wedding-cake": {
+      title: "Wedding Cake",
+      description: "Cakes and dessert tables designed for the reception.",
+    },
+    planners: {
+      title: "Wedding planner",
+      description: "Full planning packages for your event.",
     },
     "photo-locations": {
       title: "Photo Session Locations",
       description: "Indoor and outdoor locations booked by the hour.",
-    },
-    dresses: {
-      title: "Dress Rentals",
-      description: "Wedding, engagement, and soiree dresses — rent or buy.",
     },
   },
   cities: {
@@ -112,6 +187,7 @@ export const en = {
     price: "Price",
     rating: "Rating",
     allCategories: "All categories",
+    allCategoriesSubtitle: "Browse every wedding specialty and open the vendors in each one.",
     empty: "Vendors in this category will appear here after admin approval.",
   },
   vendor: {
@@ -122,6 +198,7 @@ export const en = {
     book: "Request a booking",
     bookNow: "Book now",
     fromPrice: "From",
+    away: "away",
     perEvent: "per event",
     perDay: "per day",
     verified: "Verified",

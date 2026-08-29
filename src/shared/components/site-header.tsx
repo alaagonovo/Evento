@@ -31,6 +31,7 @@ export async function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   const links = [
     { href: localizedPath(locale, "/"), label: dictionary.nav.home },
     { href: localizedPath(locale, "/vendors"), label: dictionary.nav.vendors },
+    { href: `${localizedPath(locale, "/")}#reviews`, label: dictionary.nav.reviews },
   ];
 
   const accountLinks = user
@@ -86,7 +87,7 @@ export async function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             <LanguageSwitcher locale={locale} labels={dictionary.language} />
           </div>
           {user ? (
@@ -100,10 +101,10 @@ export async function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
             </UserMenu>
           ) : (
             <>
-              <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+              <Button asChild size="sm">
                 <Link href={localizedPath(locale, "/login")}>{dictionary.nav.login}</Link>
               </Button>
-              <Button asChild size="sm" className="hidden sm:inline-flex">
+              <Button asChild variant="outline" size="sm" className="hidden sm:inline-flex">
                 <Link href={`${localizedPath(locale, "/signup")}?role=vendor`}>
                   {dictionary.nav.becomeVendor}
                 </Link>
