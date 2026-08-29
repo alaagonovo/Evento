@@ -1,7 +1,36 @@
-import type { NextConfig } from "next";
+import withPWA from "next-pwa";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  distDir: "build",
+  reactStrictMode: true,
+
+  compiler: {
+    removeConsole: process.env.NODE_ENV !== "development",
+  },
+
+  images: {
+    // Temporary: allow any remote host until production domains are locked down.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
+        pathname: "/**",
+      },
+    ],
+  },
+
+  turbopack: {}, // تعطيل Turbopack
 };
 
-export default nextConfig;
+export default withPWA({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+  register: true,
+  skipWaiting: true,
+})(nextConfig);

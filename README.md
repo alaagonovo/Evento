@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Evento
 
-## Getting Started
+Marketplace for booking event services in Egypt (weddings, engagements, birthdays, and general events). Customers browse seven vendor specialties; vendors manage offerings, availability, and bookings; admins approve vendors.
 
-First, run the development server:
+## Stack
+
+- Next.js App Router (TypeScript) + Tailwind CSS + shadcn/ui
+- Supabase (Postgres, Auth, Storage, RLS, Realtime) — wired in step 2
+- react-hook-form + Zod
+- Vitest (unit) + Playwright (e2e)
+- Vercel
+
+Arabic RTL is the default locale (`/ar`). English lives at `/en`.
+
+## Modules
+
+Each domain lives under `src/modules/<name>/` with `components/`, `hooks/`, `services/`, `types/`, and a public `index.ts`.
+
+**Rule:** app code and other modules import only from `@/modules/<name>`. Never from a nested file inside another module.
+
+| Module | Responsibility |
+|---|---|
+| `auth` | Sign up, login, session |
+| `users` | Profiles and roles (customer / vendor / admin) |
+| `vendors` | Shared vendor browse, detail, and base types |
+| `venues` | Date-based halls / event spaces |
+| `photographers` | Package-based photo/video |
+| `planners` | Planning packages |
+| `makeup-artists` | Services + optional trials |
+| `catering` | Per-person menus |
+| `photo-locations` | Hourly locations |
+| `dresses` | Size + fitting-to-return lock |
+| `bookings` | Unified booking + conflict prevention |
+| `reviews` | Ratings after completed bookings |
+| `messaging` | Booking threads (Realtime) |
+| `dashboard` | Customer / vendor / admin shells |
+| `payments` | Paymob placeholder |
+| `notifications` | Transactional email + `email_logs` |
+
+`src/app/` stays thin: locale routing and page composition only.
+
+## Setup
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Required env vars in `.env.local`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` (server-only, later admin/email jobs)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Auth confirmation and password-reset emails are sent by Supabase. Brand them as Evento with the HTML in `supabase/templates/` and custom SMTP (sender name `Evento`). See `supabase/templates/README.md`.
 
-## Learn More
+After pulling SQL changes, re-run `supabase/auth.sql` in the Supabase SQL editor so `email_exists` is available and `dev@gonovo.tech` is promoted to admin (the Auth user for that email must already exist).
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Local app |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm test` | Vitest |
+| `npm run test:coverage` | Vitest with coverage (services/hooks target: 70%) |
+| `npm run test:e2e` | Playwright smoke tests |
+| `npm run format` | Prettier |
+| `npm run build` | Production build |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+CI (GitHub Actions) runs lint → type-check → test → build on every pull request.
 
-## Deploy on Vercel
+## Tests
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Unit: `src/**/*.test.ts` next to the code under test
+- E2E: `e2e/` (full booking journeys land when bookings are implemented)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Commits
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `docs:`, `chore:`, `test:`).

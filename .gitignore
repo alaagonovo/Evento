@@ -22,7 +22,6 @@
 
 # misc
 .DS_Store
-*.pem
 
 # debug
 npm-debug.log*
@@ -30,8 +29,45 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# environment & secrets — never commit real keys
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+!.env*.example
+
+# certificates, private keys, cloud credentials
+*.pem
+*.p8
+*.p12
+*.pfx
+*.key
+id_rsa
+id_dsa
+*.keystore
+credentials.json
+**/secrets/**
+*.secret
+.secret
+service-account*.json
+*-firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
+
+# local supabase / vercel
+supabase/.temp
+supabase/.branches
+.vercel
+.turbo
+
+# playwright
+/test-results
+/playwright-report
+/blob-report
+/playwright/.cache
 
 # vercel
 .vercel

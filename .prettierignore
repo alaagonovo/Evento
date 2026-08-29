@@ -1,0 +1,10 @@
+build
+.next
+coverage
+node_modules
+package-lock.json
+public/sw.js
+public/workbox-*.js
+public/swe-worker-*.js
+playwright-report
+test-results
