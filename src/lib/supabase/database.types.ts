@@ -18,6 +18,19 @@ export type EmailType =
   | "payment_confirmation"
   | "vendor_new_booking";
 
+type Fk<
+  Name extends string,
+  Column extends string,
+  Relation extends string,
+  OneToOne extends boolean = false,
+> = {
+  foreignKeyName: Name;
+  columns: [Column];
+  isOneToOne: OneToOne;
+  referencedRelation: Relation;
+  referencedColumns: ["id"];
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -74,7 +87,9 @@ export type Database = {
           reviews_count?: number | null;
         };
         Update: Partial<Database["public"]["Tables"]["vendors"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"vendors_profile_id_fkey", "profile_id", "profiles", true>,
+        ];
       };
       venue_details: {
         Row: {
@@ -86,7 +101,9 @@ export type Database = {
         };
         Insert: Database["public"]["Tables"]["venue_details"]["Row"];
         Update: Partial<Database["public"]["Tables"]["venue_details"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"venue_details_vendor_id_fkey", "vendor_id", "vendors", true>,
+        ];
       };
       photo_location_details: {
         Row: {
@@ -99,7 +116,9 @@ export type Database = {
         Update: Partial<
           Database["public"]["Tables"]["photo_location_details"]["Insert"]
         >;
-        Relationships: [];
+        Relationships: [
+          Fk<"photo_location_details_vendor_id_fkey", "vendor_id", "vendors", true>,
+        ];
       };
       photographer_packages: {
         Row: {
@@ -118,7 +137,9 @@ export type Database = {
         Update: Partial<
           Database["public"]["Tables"]["photographer_packages"]["Insert"]
         >;
-        Relationships: [];
+        Relationships: [
+          Fk<"photographer_packages_vendor_id_fkey", "vendor_id", "vendors">,
+        ];
       };
       planner_packages: {
         Row: {
@@ -134,7 +155,9 @@ export type Database = {
           "id"
         > & { id?: string };
         Update: Partial<Database["public"]["Tables"]["planner_packages"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"planner_packages_vendor_id_fkey", "vendor_id", "vendors">,
+        ];
       };
       makeup_artist_services: {
         Row: {
@@ -152,7 +175,9 @@ export type Database = {
         Update: Partial<
           Database["public"]["Tables"]["makeup_artist_services"]["Insert"]
         >;
-        Relationships: [];
+        Relationships: [
+          Fk<"makeup_artist_services_vendor_id_fkey", "vendor_id", "vendors">,
+        ];
       };
       catering_packages: {
         Row: {
@@ -168,7 +193,9 @@ export type Database = {
           "id"
         > & { id?: string };
         Update: Partial<Database["public"]["Tables"]["catering_packages"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"catering_packages_vendor_id_fkey", "vendor_id", "vendors">,
+        ];
       };
       dresses: {
         Row: {
@@ -188,7 +215,9 @@ export type Database = {
           id?: string;
         };
         Update: Partial<Database["public"]["Tables"]["dresses"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"dresses_vendor_id_fkey", "vendor_id", "vendors">,
+        ];
       };
       availability: {
         Row: {
@@ -202,7 +231,9 @@ export type Database = {
           id?: string;
         };
         Update: Partial<Database["public"]["Tables"]["availability"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"availability_vendor_id_fkey", "vendor_id", "vendors">,
+        ];
       };
       bookings: {
         Row: {
@@ -225,7 +256,10 @@ export type Database = {
           "id" | "created_at" | "updated_at"
         > & { id?: string };
         Update: Partial<Database["public"]["Tables"]["bookings"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"bookings_customer_id_fkey", "customer_id", "profiles">,
+          Fk<"bookings_vendor_id_fkey", "vendor_id", "vendors">,
+        ];
       };
       dress_bookings: {
         Row: {
@@ -242,7 +276,10 @@ export type Database = {
           id?: string;
         };
         Update: Partial<Database["public"]["Tables"]["dress_bookings"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"dress_bookings_booking_id_fkey", "booking_id", "bookings">,
+          Fk<"dress_bookings_dress_id_fkey", "dress_id", "dresses">,
+        ];
       };
       reviews: {
         Row: {
@@ -258,7 +295,11 @@ export type Database = {
           id?: string;
         };
         Update: Partial<Database["public"]["Tables"]["reviews"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"reviews_booking_id_fkey", "booking_id", "bookings">,
+          Fk<"reviews_customer_id_fkey", "customer_id", "profiles">,
+          Fk<"reviews_vendor_id_fkey", "vendor_id", "vendors">,
+        ];
       };
       messages: {
         Row: {
@@ -272,7 +313,10 @@ export type Database = {
           id?: string;
         };
         Update: Partial<Database["public"]["Tables"]["messages"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"messages_booking_id_fkey", "booking_id", "bookings">,
+          Fk<"messages_sender_id_fkey", "sender_id", "profiles">,
+        ];
       };
       email_logs: {
         Row: {
@@ -290,7 +334,9 @@ export type Database = {
           id?: string;
         };
         Update: Partial<Database["public"]["Tables"]["email_logs"]["Insert"]>;
-        Relationships: [];
+        Relationships: [
+          Fk<"email_logs_booking_id_fkey", "booking_id", "bookings">,
+        ];
       };
     };
     Views: Record<string, never>;
