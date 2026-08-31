@@ -65,7 +65,12 @@ export type MockVendor = {
 const unsplash = (id: string, width = 1600) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=80`;
 
-export const HERO_IMAGE = unsplash("photo-1519741497674-611481863552", 2400);
+export const HERO_IMAGE = unsplash("photo-1528605248644-14dd04022da1", 2400);
+
+export const HERO_VIDEO = "https://assets.mixkit.co/videos/5227/5227-720.mp4";
+
+export const HERO_VIDEO_POSTER =
+  "https://assets.mixkit.co/videos/5227/5227-thumb-720-0.jpg";
 
 export const CATEGORY_IMAGES: Record<VendorCategorySlug, string> = {
   venues: unsplash("photo-1511795409834-ef04bbd61622", 1200),

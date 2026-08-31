@@ -3,7 +3,7 @@ import type { Dictionary } from "./en";
 export const ar: Dictionary = {
   meta: {
     title: "Evento",
-    description: "احجزي خدمات الأفراح والخطوبة وأعياد الميلاد والمناسبات في مصر.",
+    description: "احجزي القاعات والمزوّدين وخدمات المناسبات في مصر.",
   },
   brand: "Evento",
   nav: {
@@ -30,9 +30,9 @@ export const ar: Dictionary = {
   },
   home: {
     heroEyebrow: "منصة المناسبات في مصر",
-    heroTitle: "يومك يبدأ من اختيارٍ يطمئنك",
+    heroTitle: "ابحثي. قارني. احجزي.",
     heroSubtitle:
-      "قاعات، تصوير، زهور، ضيافة وكل تخصصات الفرح — مزوّدون موثوقون للمناسبات في مصر.",
+      "قاعات، تصوير، ضيافة والمزيد — ابحثي بالمدينة والتاريخ واحجزي مزوّدين موثوقين في مصر.",
     searchCategory: "التخصصات",
     searchCategoriesPlaceholder: "أي تخصص",
     searchCategoriesHint: "اختاري تخصصًا أو أكثر",
@@ -50,7 +50,7 @@ export const ar: Dictionary = {
     searchCta: "ابحث",
     browseVendors: "تصفحي المزوّدين",
     categoriesHeading: "كل تفاصيل مناسبتك",
-    categoriesSubtitle: "من القاعة لآخر تفصيلة — قارني واحجزي كل تخصصات الفرح.",
+    categoriesSubtitle: "من القاعة لآخر تفصيلة — قارني المزوّدين واحجزي حسب التاريخ.",
     viewAll: "عرض الكل",
     prevCategories: "التخصصات السابقة",
     nextCategories: "التخصصات التالية",
@@ -60,19 +60,19 @@ export const ar: Dictionary = {
     featuredEmptyHint: "يمكنكِ تصفح كل التخصصات إلى أن تُعتمد العروض الجديدة.",
     socialHeading: "قرار العيلة… بثقة أكبر.",
     socialCouplesValue: "+12,400",
-    socialCouplesLabel: "زوج اختاروا Evento",
+    socialCouplesLabel: "مناسبة اتحجزت على Evento",
     socialRatingValue: "4.9",
     socialRatingLabel: "متوسط تقييم المزوّدين",
     socialVendorsValue: "+860",
     socialVendorsLabel: "مزوّد موثّق",
     socialCitiesValue: "18",
     socialCitiesLabel: "مدينة في مصر",
-    reviewsHeading: "كلام الأزواج",
-    reviewsSubtitle: "ملاحظات من أفراح اتحجزت على Evento — وكل تقييم مربوط بتخصصه.",
+    reviewsHeading: "آراء العملاء",
+    reviewsSubtitle: "ملاحظات من مناسبات اتحجزت على Evento — وكل تقييم مربوط بتخصصه.",
     reviewCategory: "التخصص",
   },
   footer: {
-    tagline: "حجوزات أنيقة للأفراح والمناسبات في مصر.",
+    tagline: "احجزي القاعات والمزوّدين للمناسبات في مصر.",
     categories: "التخصصات",
     explore: "استكشفي",
     company: "Evento",
@@ -188,7 +188,7 @@ export const ar: Dictionary = {
     price: "السعر",
     rating: "التقييم",
     allCategories: "كل التخصصات",
-    allCategoriesSubtitle: "تصفحي كل تخصصات الفرح وافتحي المزوّدين في كل تخصص.",
+    allCategoriesSubtitle: "تصفحي كل التخصصات وافتحي المزوّدين في كل تخصص.",
     empty: "سيظهر المزوّدون في هذا التخصص هنا بعد اعتماد الإدارة.",
   },
   vendor: {

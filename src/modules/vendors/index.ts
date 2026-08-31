@@ -14,6 +14,8 @@ export {
   CATEGORY_IMAGES,
   CITY_SLUGS,
   HERO_IMAGE,
+  HERO_VIDEO,
+  HERO_VIDEO_POSTER,
   type CitySlug,
 } from "./data/mock";
 export {

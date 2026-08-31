@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/shared/lib/utils";
 import { type Dictionary, type Locale } from "@/shared/lib/i18n";
+import { cn } from "@/shared/lib/utils";
 import { HIGHLIGHT_REVIEWS } from "../data/highlights";
 import { ReviewCard } from "./review-card";
 
@@ -14,7 +14,11 @@ export function ReviewMarquee({ locale, dictionary }: ReviewMarqueeProps) {
   const copies = [0, 1] as const;
 
   return (
-    <div className="mask-fade-x group overflow-hidden" aria-label={dictionary.home.reviewsHeading}>
+    <div
+      dir="ltr"
+      className="mask-fade-x group overflow-hidden"
+      aria-label={dictionary.home.reviewsHeading}
+    >
       <div className="flex w-max animate-review-marquee group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] motion-reduce:w-full motion-reduce:animate-none motion-reduce:overflow-x-auto motion-reduce:[scrollbar-width:none] motion-reduce:[&::-webkit-scrollbar]:hidden">
         {copies.flatMap((copy) =>
           HIGHLIGHT_REVIEWS.map((review) => (
