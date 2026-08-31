@@ -9,6 +9,7 @@ export const ar: Dictionary = {
   nav: {
     home: "الرئيسية",
     vendors: "المزوّدون",
+    offers: "العروض",
     reviews: "التقييمات",
     dashboard: "لوحة التحكم",
     bookings: "الحجوزات",
@@ -58,7 +59,14 @@ export const ar: Dictionary = {
     featuredSubtitle: "اختيارات موثّقة ومحبوبة هذا الموسم — جاهزة للحجز.",
     featuredEmpty: "سيظهر المزوّدون المميزون هنا بعد اعتماد الحسابات.",
     featuredEmptyHint: "يمكنكِ تصفح كل التخصصات إلى أن تُعتمد العروض الجديدة.",
+    offersHeading: "العروض",
+    offersSubtitle: "عروض محدودة من مزوّدين موثّقين — احجزي قبل ما تخلص.",
+    offerDiscount: "خصم {percent}٪",
+    offerUntil: "حتى {date}",
+    socialEyebrow: "ليه العيلة بتختار Evento",
     socialHeading: "قرار العيلة… بثقة أكبر.",
+    socialSubtitle:
+      "مزوّدون موثّقون، تقييمات حقيقية، وتغطية في مدن مصر — عشان الحجز يبقى مطمّن زي المناسبة.",
     socialCouplesValue: "+12,400",
     socialCouplesLabel: "مناسبة اتحجزت على Evento",
     socialRatingValue: "4.9",
@@ -190,6 +198,14 @@ export const ar: Dictionary = {
     allCategories: "كل التخصصات",
     allCategoriesSubtitle: "تصفحي كل التخصصات وافتحي المزوّدين في كل تخصص.",
     empty: "سيظهر المزوّدون في هذا التخصص هنا بعد اعتماد الإدارة.",
+  },
+  offers: {
+    title: "العروض",
+    subtitle: "تصفحي كل العروض الحالية وصفّي حسب التخصص.",
+    allCategories: "كل التخصصات",
+    filterCategory: "تصفية حسب التخصص",
+    emptyTitle: "لا توجد عروض في هذا التخصص",
+    emptyHint: "جرّبي تخصصًا آخر — عروض جديدة بتتنزل على مدار الموسم.",
   },
   vendor: {
     gallery: "المعرض",

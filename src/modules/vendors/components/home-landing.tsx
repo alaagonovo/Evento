@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 import { Container } from "@/shared/components/container";
@@ -9,6 +8,8 @@ import { CategorySwiper } from "./category-swiper";
 import { FeaturedVendors } from "./featured-vendors";
 import { HeroBackground } from "./hero-background";
 import { HeroSearch } from "./hero-search";
+import { HomeOffers } from "./home-offers";
+import { SocialProofSection } from "./social-proof-section";
 
 type HomeLandingProps = {
   locale: Locale;
@@ -84,6 +85,8 @@ export function HomeLanding({ locale, dictionary }: HomeLandingProps) {
         </Container>
       </section>
 
+      <HomeOffers locale={locale} dictionary={dictionary} />
+
       <section className="pb-16 sm:pb-20">
         <Container className="space-y-8">
           <div className="max-w-2xl">
@@ -98,30 +101,13 @@ export function HomeLanding({ locale, dictionary }: HomeLandingProps) {
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-secondary py-16 text-secondary-foreground sm:py-20">
-        <Image
-          src={CATEGORY_IMAGES.venues}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-20"
-        />
-        <Container className="relative">
-          <h2 className="font-heading max-w-xl text-3xl sm:text-4xl">
-            {dictionary.home.socialHeading}
-          </h2>
-          <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <dt className="text-sm text-secondary-foreground/70">{stat.label}</dt>
-                <dd className="mt-2 font-heading text-4xl text-gold sm:text-5xl">
-                  {stat.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Container>
-      </section>
+      <SocialProofSection
+        imageSrc={CATEGORY_IMAGES.venues}
+        eyebrow={dictionary.home.socialEyebrow}
+        heading={dictionary.home.socialHeading}
+        subtitle={dictionary.home.socialSubtitle}
+        stats={stats}
+      />
     </div>
   );
 }

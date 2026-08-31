@@ -363,6 +363,110 @@ export const MOCK_VENDORS: MockVendor[] = [
   },
 ];
 
+export type MockOffer = {
+  id: string;
+  vendorId: string;
+  category: VendorCategorySlug;
+  city: CitySlug;
+  title: LocalizedText;
+  vendorName: LocalizedText;
+  originalPrice: number;
+  offerPrice: number;
+  discountPercent: number;
+  expiresOn: string;
+  image: string;
+};
+
+export const MOCK_OFFERS: MockOffer[] = [
+  {
+    id: "nile-weekday",
+    vendorId: "nile-palace",
+    category: "venues",
+    city: "cairo",
+    title: { ar: "قاعة وسط الأسبوع", en: "Midweek hall booking" },
+    vendorName: { ar: "قصر النيل", en: "Nile Palace" },
+    originalPrice: 185000,
+    offerPrice: 151700,
+    discountPercent: 18,
+    expiresOn: "2026-09-30",
+    image: unsplash("photo-1511795409834-ef04bbd61622", 1400),
+  },
+  {
+    id: "lens-full-day",
+    vendorId: "lens-and-light",
+    category: "photographers",
+    city: "giza",
+    title: { ar: "تغطية يوم كامل", en: "Full-day photo coverage" },
+    vendorName: { ar: "عدسة ونور", en: "Lens & Light" },
+    originalPrice: 28000,
+    offerPrice: 21000,
+    discountPercent: 25,
+    expiresOn: "2026-10-15",
+    image: unsplash("photo-1537633552985-df8429e8048b", 1400),
+  },
+  {
+    id: "bloom-bundle",
+    vendorId: "bloom-planning",
+    category: "planners",
+    city: "cairo",
+    title: { ar: "تنظيم كامل للمناسبة", en: "Full event planning" },
+    vendorName: { ar: "بلوم للتنظيم", en: "Bloom Planning" },
+    originalPrice: 45000,
+    offerPrice: 36000,
+    discountPercent: 20,
+    expiresOn: "2026-09-20",
+    image: unsplash("photo-1478146896981-b80fe463b330", 1400),
+  },
+  {
+    id: "nour-bridal",
+    vendorId: "nour-beauty",
+    category: "makeup-artists",
+    city: "alexandria",
+    title: { ar: "باقة المكياج مع تجربة", en: "Makeup package + trial" },
+    vendorName: { ar: "نور بيوتي", en: "Nour Beauty" },
+    originalPrice: 5500,
+    offerPrice: 4400,
+    discountPercent: 20,
+    expiresOn: "2026-10-05",
+    image: unsplash("photo-1487412947147-5cebf100ffc2", 1400),
+  },
+  {
+    id: "garden-hours",
+    vendorId: "garden-house",
+    category: "photo-locations",
+    city: "giza",
+    title: { ar: "ساعتان في بيت الحديقة", en: "Two hours at The Garden House" },
+    vendorName: { ar: "بيت الحديقة", en: "The Garden House" },
+    originalPrice: 2500,
+    offerPrice: 1750,
+    discountPercent: 30,
+    expiresOn: "2026-09-28",
+    image: unsplash("photo-1520854221256-17451cc331bf", 1400),
+  },
+  {
+    id: "nile-friday",
+    vendorId: "nile-palace",
+    category: "venues",
+    city: "cairo",
+    title: { ar: "ليلة الجمعة في قصر النيل", en: "Friday night at Nile Palace" },
+    vendorName: { ar: "قصر النيل", en: "Nile Palace" },
+    originalPrice: 265000,
+    offerPrice: 225250,
+    discountPercent: 15,
+    expiresOn: "2026-10-10",
+    image: unsplash("photo-1464366400600-7168b8af9bc3", 1400),
+  },
+];
+
+export function listOffers(category?: VendorCategorySlug) {
+  if (!category) return MOCK_OFFERS;
+  return MOCK_OFFERS.filter((offer) => offer.category === category);
+}
+
+export function listOfferCategories(): VendorCategorySlug[] {
+  return [...new Set(MOCK_OFFERS.map((offer) => offer.category))];
+}
+
 export function getFeaturedVendors() {
   return MOCK_VENDORS.filter((vendor) => vendor.featured);
 }

@@ -7,6 +7,8 @@ export { CategorySwiper } from "./components/category-swiper";
 export { FeaturedVendors } from "./components/featured-vendors";
 export { HeroSearch } from "./components/hero-search";
 export { HomeLanding } from "./components/home-landing";
+export { OfferCard } from "./components/offer-card";
+export { OffersBrowse } from "./components/offers-browse";
 export { VendorBrowseGrid } from "./components/vendor-browse-grid";
 export { VendorCard } from "./components/vendor-card";
 export { VendorDetailView } from "./components/vendor-detail-view";
@@ -16,7 +18,11 @@ export {
   HERO_IMAGE,
   HERO_VIDEO,
   HERO_VIDEO_POSTER,
+  MOCK_OFFERS,
+  listOfferCategories,
+  listOffers,
   type CitySlug,
+  type MockOffer,
 } from "./data/mock";
 export {
   getApprovedVendorById,

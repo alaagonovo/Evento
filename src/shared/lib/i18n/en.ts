@@ -7,6 +7,7 @@ export const en = {
   nav: {
     home: "Home",
     vendors: "Vendors",
+    offers: "Offers",
     reviews: "Reviews",
     dashboard: "Dashboard",
     bookings: "Bookings",
@@ -57,7 +58,14 @@ export const en = {
     featuredSubtitle: "Verified, reviewed, and ready to book this season.",
     featuredEmpty: "Featured vendors will appear here after accounts are approved.",
     featuredEmptyHint: "Check back soon, or browse all categories in the meantime.",
+    offersHeading: "Offers",
+    offersSubtitle: "Limited deals from verified vendors — book before they expire.",
+    offerDiscount: "{percent}% off",
+    offerUntil: "Until {date}",
+    socialEyebrow: "Why families book on Evento",
     socialHeading: "Chosen with family. Booked with confidence.",
+    socialSubtitle:
+      "Verified vendors, real ratings, and coverage across Egypt — so the booking feels as sure as the gathering.",
     socialCouplesValue: "12,400+",
     socialCouplesLabel: "events planned with Evento",
     socialRatingValue: "4.9",
@@ -189,6 +197,14 @@ export const en = {
     allCategories: "All categories",
     allCategoriesSubtitle: "Browse every specialty and open the vendors in each one.",
     empty: "Vendors in this category will appear here after admin approval.",
+  },
+  offers: {
+    title: "Offers",
+    subtitle: "Browse every current deal and filter by specialty.",
+    allCategories: "All categories",
+    filterCategory: "Filter by category",
+    emptyTitle: "No offers in this category",
+    emptyHint: "Try another specialty — new deals are added through the season.",
   },
   vendor: {
     gallery: "Gallery",
