@@ -282,6 +282,23 @@ export const en = {
       "Register your business from this account. You will not create a second email or password.",
     becomeVendorCta: "Start vendor application",
   },
+  profile: {
+    title: "Profile",
+    subtitle: "Your photo and account details on Evento.",
+    email: "Email",
+    phone: "Phone",
+    role: "Account type",
+    memberSince: "Member since",
+    noPhone: "Not added yet",
+    photoReady: "Profile photo — this is the image others see on your account.",
+    photoMissing: "No photo yet. Initials are shown until you add one.",
+    unavailable: "We could not load your profile. Sign in again and try once more.",
+    roles: {
+      customer: "Customer",
+      vendor: "Vendor",
+      admin: "Admin",
+    },
+  },
   admin: {
     overview: "Admin",
     vendors: "Vendors",

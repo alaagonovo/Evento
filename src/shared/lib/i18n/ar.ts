@@ -281,6 +281,23 @@ export const ar: Dictionary = {
     becomeVendorBody: "سجّلي نشاطك من هذا الحساب. لن تحتاجي بريدًا أو كلمة مرور جديدة.",
     becomeVendorCta: "ابدئي طلب المزوّدة",
   },
+  profile: {
+    title: "الملف الشخصي",
+    subtitle: "صورتك وبيانات حسابك على Evento.",
+    email: "البريد",
+    phone: "الهاتف",
+    role: "نوع الحساب",
+    memberSince: "عضو منذ",
+    noPhone: "لم يُضف بعد",
+    photoReady: "صورة الملف — دي الصورة اللي بتظهر على حسابك.",
+    photoMissing: "مفيش صورة لسه. بنعرض الحروف الأولى لحد ما تضيفي صورة.",
+    unavailable: "تعذر تحميل الملف. سجّلي الدخول ثم حاولي مرة أخرى.",
+    roles: {
+      customer: "عميلة",
+      vendor: "مزوّدة",
+      admin: "إدارة",
+    },
+  },
   admin: {
     overview: "الإدارة",
     vendors: "المزوّدون",

@@ -3,3 +3,4 @@
  * Import only from `@/modules/users`.
  */
 export { getProfileById, promoteCustomerToVendor, type Profile } from "./services/profiles";
+export { ProfileView } from "./components/profile-view";
