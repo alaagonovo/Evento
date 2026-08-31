@@ -1,6 +1,6 @@
 # Evento
 
-Marketplace for booking event services in Egypt (weddings, engagements, birthdays, and general events). Customers browse wedding vendor specialties; vendors manage offerings, availability, and bookings; admins approve vendors.
+Marketplace for booking event services worldwide (weddings, engagements, birthdays, and general events). Customers browse wedding vendor specialties; vendors manage offerings, availability, and bookings; admins approve vendors.
 
 ## Stack
 

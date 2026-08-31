@@ -31,6 +31,7 @@ export async function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   const links = [
     { href: localizedPath(locale, "/"), label: dictionary.nav.home },
     { href: localizedPath(locale, "/vendors"), label: dictionary.nav.vendors },
+    { href: localizedPath(locale, "/categories"), label: dictionary.nav.categories },
     { href: localizedPath(locale, "/offers"), label: dictionary.nav.offers },
     { href: `${localizedPath(locale, "/")}#reviews`, label: dictionary.nav.reviews },
   ];

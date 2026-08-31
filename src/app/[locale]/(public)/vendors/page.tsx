@@ -1,13 +1,7 @@
-import {
-  VENDOR_CATEGORY_SLUGS,
-  VendorBrowseGrid,
-  CategoryGrid,
-  cityLabel,
-  parseCategoryQuery,
-} from "@/modules/vendors";
+import { VendorBrowseGrid, cityLabel, parseCategoryQuery } from "@/modules/vendors";
 import { Badge } from "@/shared/components/ui/badge";
 import { Container } from "@/shared/components/container";
-import { getDictionary, localizedPath, parseLocale } from "@/shared/lib/i18n";
+import { getDictionary, parseLocale } from "@/shared/lib/i18n";
 
 type VendorsPageProps = {
   params: Promise<{ locale: string }>;
@@ -47,21 +41,9 @@ export default async function VendorsPage({ params, searchParams }: VendorsPageP
             {date ? <Badge variant="outline">{date}</Badge> : null}
           </div>
         ) : (
-          <p className="text-muted-foreground">
-            {dictionary.vendors.filters}: {dictionary.vendors.category}, {dictionary.vendors.city}
-          </p>
+          <p className="text-muted-foreground">{dictionary.vendors.subtitle}</p>
         )}
       </header>
-      {hasFilters ? null : (
-        <CategoryGrid
-          categories={VENDOR_CATEGORY_SLUGS.map((slug) => ({
-            slug,
-            title: dictionary.categories[slug].title,
-            description: dictionary.categories[slug].description,
-            href: localizedPath(locale, `/vendors/${slug}`),
-          }))}
-        />
-      )}
       <VendorBrowseGrid
         locale={locale}
         dictionary={dictionary}

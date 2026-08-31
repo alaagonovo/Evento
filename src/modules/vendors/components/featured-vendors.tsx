@@ -10,7 +10,7 @@ type FeaturedVendorsProps = {
 };
 
 export async function FeaturedVendors({ locale, dictionary }: FeaturedVendorsProps) {
-  const vendors = await listFeaturedVendors();
+  const vendors = (await listFeaturedVendors()).slice(0, 3);
 
   if (vendors.length === 0) {
     return (

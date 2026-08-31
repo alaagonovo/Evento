@@ -1,12 +1,13 @@
 export const en = {
   meta: {
     title: "Evento",
-    description: "Book venues, vendors, and event services across Egypt.",
+    description: "Book venues, vendors, and event services worldwide.",
   },
   brand: "Evento",
   nav: {
     home: "Home",
     vendors: "Vendors",
+    categories: "Categories",
     offers: "Offers",
     reviews: "Reviews",
     dashboard: "Dashboard",
@@ -28,10 +29,10 @@ export const en = {
     dismiss: "Not now",
   },
   home: {
-    heroEyebrow: "Egypt’s event marketplace",
+    heroEyebrow: "The worldwide event marketplace",
     heroTitle: "Find it. Compare it. Book it.",
     heroSubtitle:
-      "Venues, photographers, catering, and more — search by city and date, then book trusted vendors across Egypt.",
+      "Venues, photographers, catering, and more, search by city and date, then book trusted vendors worldwide.",
     searchCategory: "Categories",
     searchCategoriesPlaceholder: "Any specialty",
     searchCategoriesHint: "Select one or more",
@@ -50,8 +51,9 @@ export const en = {
     browseVendors: "Browse vendors",
     categoriesHeading: "Every detail of your event",
     categoriesSubtitle:
-      "From the venue to the last detail — compare vendors and book by date.",
+      "From the venue to the last detail, compare vendors and book by date.",
     viewAll: "View all",
+    seeAll: "See all",
     prevCategories: "Previous categories",
     nextCategories: "Next categories",
     featuredHeading: "Featured vendors",
@@ -59,13 +61,13 @@ export const en = {
     featuredEmpty: "Featured vendors will appear here after accounts are approved.",
     featuredEmptyHint: "Check back soon, or browse all categories in the meantime.",
     offersHeading: "Offers",
-    offersSubtitle: "Limited deals from verified vendors — book before they expire.",
+    offersSubtitle: "Limited deals from verified vendors, book before they expire.",
     offerDiscount: "{percent}% off",
     offerUntil: "Until {date}",
     socialEyebrow: "Why families book on Evento",
     socialHeading: "Chosen with family. Booked with confidence.",
     socialSubtitle:
-      "Verified vendors, real ratings, and coverage across Egypt — so the booking feels as sure as the gathering.",
+      "Verified vendors, real ratings, and coverage worldwide, so the booking feels as sure as the gathering.",
     socialCouplesValue: "12,400+",
     socialCouplesLabel: "events planned with Evento",
     socialRatingValue: "4.9",
@@ -73,13 +75,13 @@ export const en = {
     socialVendorsValue: "860+",
     socialVendorsLabel: "verified vendors",
     socialCitiesValue: "18",
-    socialCitiesLabel: "cities across Egypt",
+    socialCitiesLabel: "cities worldwide",
     reviewsHeading: "What clients say",
-    reviewsSubtitle: "Notes from events booked on Evento — each one tagged by specialty.",
+    reviewsSubtitle: "Notes from events booked on Evento, each one tagged by specialty.",
     reviewCategory: "Category",
   },
   footer: {
-    tagline: "Book venues and vendors for celebrations across Egypt.",
+    tagline: "Book venues and vendors for celebrations worldwide.",
     categories: "Categories",
     explore: "Explore",
     company: "Company",
@@ -189,6 +191,7 @@ export const en = {
   },
   vendors: {
     title: "Browse vendors",
+    subtitle: "Compare trusted vendors and book by date.",
     filters: "Filters",
     category: "Category",
     city: "City",
@@ -204,7 +207,7 @@ export const en = {
     allCategories: "All categories",
     filterCategory: "Filter by category",
     emptyTitle: "No offers in this category",
-    emptyHint: "Try another specialty — new deals are added through the season.",
+    emptyHint: "Try another specialty, new deals are added through the season.",
   },
   vendor: {
     gallery: "Gallery",
@@ -258,7 +261,7 @@ export const en = {
     title: "Nothing here yet",
     searchTitle: "No matching vendors",
     searchHint:
-      "Try another city, date, or category — new vendors join Evento every week.",
+      "Try another city, date, or category, new vendors join Evento every week.",
     bookingsTitle: "No bookings yet",
     bookingsHint: "When you request a booking, it will appear here with its status.",
   },
@@ -290,7 +293,7 @@ export const en = {
     role: "Account type",
     memberSince: "Member since",
     noPhone: "Not added yet",
-    photoReady: "Profile photo — this is the image others see on your account.",
+    photoReady: "Profile photo, this is the image others see on your account.",
     photoMissing: "No photo yet. Initials are shown until you add one.",
     unavailable: "We could not load your profile. Sign in again and try once more.",
     roles: {

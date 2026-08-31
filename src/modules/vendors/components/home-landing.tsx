@@ -89,13 +89,18 @@ export function HomeLanding({ locale, dictionary }: HomeLandingProps) {
 
       <section className="pb-16 sm:pb-20">
         <Container className="space-y-8">
-          <div className="max-w-2xl">
-            <h2 className="font-heading text-3xl sm:text-4xl">
-              {dictionary.home.featuredHeading}
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              {dictionary.home.featuredSubtitle}
-            </p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <h2 className="font-heading text-3xl sm:text-4xl">
+                {dictionary.home.featuredHeading}
+              </h2>
+              <p className="mt-3 text-muted-foreground">
+                {dictionary.home.featuredSubtitle}
+              </p>
+            </div>
+            <Button asChild variant="outline">
+              <Link href={localizedPath(locale, "/vendors")}>{dictionary.home.seeAll}</Link>
+            </Button>
           </div>
           <FeaturedVendors locale={locale} dictionary={dictionary} />
         </Container>
