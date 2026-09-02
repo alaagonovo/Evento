@@ -51,4 +51,32 @@ describe("parseVendorOnboarding", () => {
       parseVendorOnboarding({ ...validInput, galleryImages: "not-a-url" }),
     ).toThrow();
   });
+
+  it("rejects more than 10 gallery images", () => {
+    const urls = Array.from({ length: 11 }, (_, index) => `https://example.com/${index}.jpg`).join(
+      "\n",
+    );
+    expect(() => parseVendorOnboarding({ ...validInput, galleryImages: urls })).toThrow();
+  });
+
+  it("rejects more than 3 gallery videos", () => {
+    const urls = Array.from(
+      { length: 4 },
+      (_, index) => `https://res.cloudinary.com/demo/video/upload/v1/evento/vendors/gallery/${index}.mp4`,
+    ).join("\n");
+    expect(() => parseVendorOnboarding({ ...validInput, galleryImages: urls })).toThrow();
+  });
+
+  it("accepts 10 photos and 3 videos", () => {
+    const photos = Array.from({ length: 10 }, (_, index) => `https://example.com/${index}.jpg`);
+    const videos = Array.from(
+      { length: 3 },
+      (_, index) => `https://res.cloudinary.com/demo/video/upload/v1/evento/vendors/gallery/${index}.mp4`,
+    );
+    const parsed = parseVendorOnboarding({
+      ...validInput,
+      galleryImages: [...photos, ...videos].join("\n"),
+    });
+    expect(parsed.galleryImages).toHaveLength(13);
+  });
 });

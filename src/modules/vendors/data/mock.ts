@@ -22,6 +22,7 @@ export type VendorPhoto = {
   src: string;
   alt: LocalizedText;
   angle?: DressAngle;
+  kind?: "image" | "video";
 };
 
 export type VendorPackage = {

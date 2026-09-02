@@ -1,5 +1,4 @@
 import { CalendarDays, Mail, Phone, Shield } from "lucide-react";
-import { UserAvatar } from "@/shared/components/user-avatar";
 import { Badge } from "@/shared/components/ui/badge";
 import {
   Card,
@@ -9,6 +8,7 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { type Dictionary, type Locale } from "@/shared/lib/i18n";
+import { ProfilePhotoForm } from "./profile-photo-form";
 import type { Profile } from "../services/profiles";
 
 type ProfileViewProps = {
@@ -51,12 +51,10 @@ export function ProfileView({ profile, locale, dictionary }: ProfileViewProps) {
       <Card>
         <CardHeader className="border-b">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-            <UserAvatar
+            <ProfilePhotoForm
               name={displayName}
-              src={profile.avatarUrl}
-              size="default"
-              className="size-24 after:border-gold/40"
-              fallbackClassName="text-2xl"
+              initialUrl={profile.avatarUrl}
+              dictionary={dictionary}
             />
             <div className="min-w-0 space-y-2">
               <div className="flex flex-wrap items-center gap-2">

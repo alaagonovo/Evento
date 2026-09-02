@@ -5,7 +5,9 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
+import { ImageUploadField } from "@/shared/components/image-upload-field";
 import type { Dictionary, Locale } from "@/shared/lib/i18n";
+import { MAX_GALLERY_IMAGES, MAX_GALLERY_VIDEOS } from "@/shared/lib/upload-limits";
 import { CITY_SLUGS } from "../data/mock";
 import { VENDOR_TYPE_TO_CATEGORY, VENDOR_TYPES } from "../types/category";
 import { submitVendorOnboarding } from "../services/actions";
@@ -48,8 +50,16 @@ function RequiredLabel({ htmlFor, children }: { htmlFor: string; children: strin
   );
 }
 
+function urlsFromText(value: string) {
+  return value
+    .split(/[\n,]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
 export function VendorOnboardingForm({ locale, dictionary }: VendorOnboardingFormProps) {
   const [error, setError] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [pending, startTransition] = useTransition();
   const form = useForm<OnboardingFormValues>({
     defaultValues: {
@@ -65,7 +75,10 @@ export function VendorOnboardingForm({ locale, dictionary }: VendorOnboardingFor
     },
   });
   const copy = dictionary.onboarding;
+  const common = dictionary.common;
   const errors = form.formState.errors;
+  const coverImage = form.watch("coverImage");
+  const galleryImages = form.watch("galleryImages");
 
   function onSubmit(values: OnboardingFormValues) {
     const parsed = safeParseVendorOnboarding(values);
@@ -185,28 +198,58 @@ export function VendorOnboardingForm({ locale, dictionary }: VendorOnboardingFor
       </div>
       <div className="space-y-2">
         <RequiredLabel htmlFor="coverImage">{copy.coverImage}</RequiredLabel>
-        <Input
+        <input type="hidden" {...form.register("coverImage", { required: copy.required })} />
+        <ImageUploadField
           id="coverImage"
-          type="url"
-          required
-          {...form.register("coverImage", { required: copy.required })}
+          folder="vendor-cover"
+          maxFiles={1}
+          value={coverImage ? [coverImage] : []}
+          onChange={(urls) => form.setValue("coverImage", urls[0] ?? "", { shouldValidate: true })}
+          onBusy={setUploading}
+          disabled={pending}
+          chooseLabel={common.choosePhoto}
+          changeLabel={common.changePhoto}
+          uploadingLabel={common.uploading}
+          removeLabel={common.removePhoto}
+          failedLabel={common.uploadFailed}
+          tooLargeLabel={common.imageTooLarge}
+          tooManyLabel={common.tooManyImages}
+          hint={copy.coverHint}
+          percentLabel={common.uploadingPercent}
         />
         <FieldError message={errors.coverImage?.message} />
       </div>
       <div className="space-y-2">
         <RequiredLabel htmlFor="galleryImages">{copy.galleryImages}</RequiredLabel>
-        <textarea
+        <input type="hidden" {...form.register("galleryImages", { required: copy.required })} />
+        <ImageUploadField
           id="galleryImages"
-          required
-          rows={4}
-          className="w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm"
-          placeholder={copy.galleryHint}
-          {...form.register("galleryImages", { required: copy.required })}
+          folder="vendor-gallery"
+          maxFiles={MAX_GALLERY_IMAGES}
+          maxVideos={MAX_GALLERY_VIDEOS}
+          value={urlsFromText(galleryImages)}
+          onChange={(urls) =>
+            form.setValue("galleryImages", urls.join("\n"), { shouldValidate: true })
+          }
+          onBusy={setUploading}
+          disabled={pending}
+          chooseLabel={common.addPhotos}
+          changeLabel={common.changePhoto}
+          uploadingLabel={common.uploading}
+          removeLabel={common.removePhoto}
+          failedLabel={common.uploadFailed}
+          tooLargeLabel={common.imageTooLarge}
+          tooManyLabel={common.tooManyImages}
+          tooLargeVideoLabel={common.videoTooLarge}
+          tooManyVideosLabel={common.tooManyVideos}
+          hint={copy.galleryHint}
+          countLabel={common.photosCount}
+          percentLabel={common.uploadingPercent}
         />
         <FieldError message={errors.galleryImages?.message} />
       </div>
       {error ? <p className="text-sm text-destructive">{copy.invalid}</p> : null}
-      <Button type="submit" size="xl" className="w-full" disabled={pending}>
+      <Button type="submit" size="xl" className="w-full" disabled={pending || uploading}>
         {copy.submit}
       </Button>
     </form>

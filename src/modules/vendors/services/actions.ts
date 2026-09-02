@@ -40,7 +40,9 @@ export async function submitVendorOnboarding(
     return { ok: false as const };
   }
 
-  redirect(`/${locale}/dashboard/vendor`);
+  revalidatePath(`/${locale}`);
+  revalidatePath(`/${locale}/admin`, "layout");
+  redirect(`/${locale}`);
 }
 
 export async function approveVendorAction(vendorId: string, locale: string) {
@@ -60,6 +62,7 @@ export async function approveVendorAction(vendorId: string, locale: string) {
     return { ok: false as const };
   }
 
+  revalidatePath(`/${locale}/admin`, "layout");
   revalidatePath(`/${locale}/admin/vendors`);
   revalidatePath(`/${locale}/vendors`);
   return { ok: true as const };
@@ -82,6 +85,7 @@ export async function deleteVendorUserAction(vendorId: string, locale: string) {
     return { ok: false as const };
   }
 
+  revalidatePath(`/${locale}/admin`, "layout");
   revalidatePath(`/${locale}/admin/vendors`);
   revalidatePath(`/${locale}/vendors`);
   return { ok: true as const };

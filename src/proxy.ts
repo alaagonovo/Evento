@@ -53,6 +53,10 @@ export async function proxy(request: NextRequest) {
   const { supabaseResponse, user, supabase } = await updateSession(request);
   const { pathname } = request.nextUrl;
 
+  if (pathname.startsWith("/api/")) {
+    return supabaseResponse;
+  }
+
   if (!pathnameHasLocale(pathname)) {
     const locale = detectLocale(request);
     const url = request.nextUrl.clone();

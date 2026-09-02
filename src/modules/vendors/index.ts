@@ -34,6 +34,7 @@ export { BecomeVendorCard } from "./components/become-vendor-card";
 export { VendorOnboardingForm } from "./components/vendor-onboarding-form";
 export { VendorStatusBanner } from "./components/vendor-status-banner";
 export {
+  countPendingVendorApplications,
   getVendorByProfileId,
   listVendorsForAdmin,
 } from "./services/vendor-account";

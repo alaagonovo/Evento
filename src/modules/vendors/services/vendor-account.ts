@@ -102,6 +102,20 @@ export async function listVendorsForAdmin(): Promise<AdminVendorApplication[]> {
   return data ?? [];
 }
 
+export async function countPendingVendorApplications() {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("vendors")
+    .select("id", { count: "exact", head: true })
+    .eq("status", "pending");
+
+  if (error) {
+    return 0;
+  }
+
+  return count ?? 0;
+}
+
 export async function approveVendor(vendorId: string) {
   const supabase = await createClient();
   const { error: rpcError } = await supabase.rpc("approve_vendor", { vendor_id: vendorId });

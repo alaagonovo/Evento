@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { countPendingVendorApplications } from "@/modules/vendors";
 import { SiteHeader } from "@/shared/components/site-header";
 import { getDictionary, localizedPath, parseLocale } from "@/shared/lib/i18n";
 
@@ -14,10 +15,15 @@ export default async function AdminGroupLayout({
   const { locale: localeParam } = await params;
   const locale = parseLocale(localeParam);
   const dictionary = getDictionary(locale);
+  const pendingApplications = await countPendingVendorApplications();
 
   const links = [
     { href: localizedPath(locale, "/admin"), label: dictionary.admin.overview },
-    { href: localizedPath(locale, "/admin/vendors"), label: dictionary.admin.vendors },
+    {
+      href: localizedPath(locale, "/admin/vendors"),
+      label: dictionary.admin.vendors,
+      badge: pendingApplications,
+    },
     { href: localizedPath(locale, "/admin/bookings"), label: dictionary.admin.bookings },
   ];
 
@@ -31,9 +37,26 @@ export default async function AdminGroupLayout({
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
-                {link.label}
+                <span>{link.label}</span>
+                {link.badge ? (
+                  <span
+                    className="relative inline-flex"
+                    aria-label={dictionary.admin.pendingApplications.replace(
+                      "{count}",
+                      String(link.badge),
+                    )}
+                  >
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 animate-ping rounded-full bg-gold/70"
+                    />
+                    <span className="relative inline-flex min-w-5 animate-pulse items-center justify-center rounded-full bg-gold px-1.5 text-[11px] font-semibold leading-5 text-gold-foreground">
+                      {link.badge > 99 ? "99+" : link.badge}
+                    </span>
+                  </span>
+                ) : null}
               </Link>
             ))}
           </nav>

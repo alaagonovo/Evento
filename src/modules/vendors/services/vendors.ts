@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/database.types";
-import { getFeaturedVendors, MOCK_VENDORS } from "../data/mock";
 import { asLocalized } from "../types/vendor";
 import type { VendorView } from "../types/vendor";
 import { haversineKm } from "../lib/geo";
@@ -11,37 +10,6 @@ import {
   vendorIdSchema,
   type ListVendorsInput,
 } from "./map-vendor";
-
-/** Temporary: public browse uses mock.ts instead of Supabase. */
-const USE_DUMMY_VENDORS = true;
-
-function listDummyVendors(input: ListVendorsInput = {}): VendorView[] {
-  const parsed = listVendorsInputSchema.parse(input);
-  const categorySlugs = [
-    ...new Set([
-      ...(parsed.categories ?? []),
-      ...(parsed.category ? [parsed.category] : []),
-    ]),
-  ];
-
-  let vendors: VendorView[] = MOCK_VENDORS.filter((vendor) => {
-    if (categorySlugs.length > 0 && !categorySlugs.includes(vendor.category)) {
-      return false;
-    }
-
-    if (parsed.city && !vendor.city.toLowerCase().includes(parsed.city.trim().toLowerCase())) {
-      return false;
-    }
-
-    return true;
-  });
-
-  if (parsed.limit) {
-    vendors = vendors.slice(0, parsed.limit);
-  }
-
-  return vendors;
-}
 
 type VendorRow = Database["public"]["Tables"]["vendors"]["Row"];
 type VenueDetails = Database["public"]["Tables"]["venue_details"]["Row"];
@@ -72,10 +40,6 @@ function firstRelated<T>(value: T | T[] | null | undefined): T | null {
 }
 
 export async function listApprovedVendors(input: ListVendorsInput = {}): Promise<VendorView[]> {
-  if (USE_DUMMY_VENDORS) {
-    return listDummyVendors(input);
-  }
-
   const parsed = listVendorsInputSchema.parse(input);
   const supabase = await createClient();
 
@@ -148,18 +112,10 @@ export async function listApprovedVendors(input: ListVendorsInput = {}): Promise
 }
 
 export async function listFeaturedVendors(): Promise<VendorView[]> {
-  if (USE_DUMMY_VENDORS) {
-    return getFeaturedVendors().slice(0, 3);
-  }
-
   return listApprovedVendors({ limit: 3 });
 }
 
 export async function getApprovedVendorById(id: string): Promise<VendorView | null> {
-  if (USE_DUMMY_VENDORS) {
-    return MOCK_VENDORS.find((vendor) => vendor.id === id) ?? null;
-  }
-
   const parsedId = vendorIdSchema.safeParse(id);
 
   if (!parsedId.success) {

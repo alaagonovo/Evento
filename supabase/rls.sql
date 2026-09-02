@@ -221,6 +221,7 @@ revoke all on function public.approve_vendor(uuid) from public;
 grant execute on function public.approve_vendor(uuid) to authenticated;
 
 grant update on table public.vendors to authenticated;
+grant update on table public.profiles to authenticated;
 
 create or replace function public.delete_vendor_user(target_vendor_id uuid)
 returns void

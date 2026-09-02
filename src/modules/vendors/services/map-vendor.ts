@@ -8,6 +8,7 @@ import {
   isVendorType,
   type VendorCategorySlug,
 } from "../types/category";
+import { isVideoUrl } from "@/shared/lib/media";
 import { asLocalized, type VendorView } from "../types/vendor";
 
 type VendorRow = Database["public"]["Tables"]["vendors"]["Row"];
@@ -72,6 +73,7 @@ export function mapVendorRow(
         ? galleryUrls.map((src) => ({
             src,
             alt: asLocalized(row.business_name),
+            kind: isVideoUrl(src) ? ("video" as const) : ("image" as const),
           }))
         : [
             {

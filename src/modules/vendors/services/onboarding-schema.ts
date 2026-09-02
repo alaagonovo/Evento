@@ -5,6 +5,12 @@ import {
   parseGoogleMapsCoords,
 } from "../lib/parse-google-maps-location";
 import { VENDOR_TYPES } from "../types/category";
+import { isVideoUrl } from "@/shared/lib/media";
+import {
+  MAX_GALLERY_IMAGES,
+  MAX_GALLERY_ITEMS,
+  MAX_GALLERY_VIDEOS,
+} from "@/shared/lib/upload-limits";
 
 const urlListSchema = z
   .string()
@@ -16,7 +22,9 @@ const urlListSchema = z
       .map((item) => item.trim())
       .filter(Boolean),
   )
-  .pipe(z.array(z.string().url()).min(1).max(12));
+  .pipe(z.array(z.string().url()).min(1).max(MAX_GALLERY_ITEMS))
+  .refine((urls) => urls.filter((url) => !isVideoUrl(url)).length <= MAX_GALLERY_IMAGES)
+  .refine((urls) => urls.filter(isVideoUrl).length <= MAX_GALLERY_VIDEOS);
 
 function requiredNumber() {
   return z.preprocess((value) => {

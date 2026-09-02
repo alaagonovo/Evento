@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "@/shared/components/ui/dialog";
 import { Separator } from "@/shared/components/ui/separator";
+import { isVideoUrl } from "@/shared/lib/media";
 import { formatPrice } from "@/shared/lib/utils";
 import type { Dictionary, Locale } from "@/shared/lib/i18n";
 import { cityLabel } from "../lib/city-label";
@@ -91,15 +92,28 @@ export function VendorApplicationDialog({
                 ) : null}
                 {gallery.length > 0 ? (
                   <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-                    {gallery.map((src) => (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        key={src}
-                        src={src}
-                        alt=""
-                        className="aspect-square w-full rounded-xl object-cover ring-1 ring-border/70"
-                      />
-                    ))}
+                    {gallery.map((src) =>
+                      isVideoUrl(src) ? (
+                        <span key={src} className="relative block overflow-hidden rounded-xl ring-1 ring-border/70">
+                          <video
+                            src={src}
+                            className="aspect-square w-full object-cover"
+                            muted
+                            playsInline
+                            preload="metadata"
+                            controls
+                          />
+                        </span>
+                      ) : (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          key={src}
+                          src={src}
+                          alt=""
+                          className="aspect-square w-full rounded-xl object-cover ring-1 ring-border/70"
+                        />
+                      ),
+                    )}
                   </div>
                 ) : !vendor.cover_image ? (
                   <p className="text-sm text-muted-foreground">—</p>
