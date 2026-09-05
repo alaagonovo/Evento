@@ -4,7 +4,17 @@ import { useMemo, useState, useTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { Banknote, CheckCircle2, CreditCard, ShieldCheck, Wallet } from "lucide-react";
+import {
+  Banknote,
+  Cake,
+  CheckCircle2,
+  CreditCard,
+  Gem,
+  Heart,
+  PartyPopper,
+  ShieldCheck,
+  Wallet,
+} from "lucide-react";
 import { AvailabilityCalendar } from "@/modules/vendors/components/availability-calendar";
 import { cityLabel } from "@/modules/vendors/lib/city-label";
 import type { VendorView } from "@/modules/vendors/types/vendor";
@@ -28,6 +38,13 @@ import {
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/components/ui/select";
 import { type Dictionary, type Locale, localizedPath } from "@/shared/lib/i18n";
 import { cn, formatPrice, localized } from "@/shared/lib/utils";
 import { submitBookingRequest } from "../services/actions";
@@ -66,6 +83,20 @@ const PAYMENT_ICONS = {
   venue: Banknote,
 } as const;
 
+const EVENT_TYPE_ICONS = {
+  wedding: Heart,
+  engagement: Gem,
+  birthday: Cake,
+  general: PartyPopper,
+} as const;
+
+const WALLET_LOGOS: Record<WalletProvider, string> = {
+  instapay: "/payment/instapay.jpg",
+  vodafone: "/payment/vodafone-cash.png",
+  orange: "/payment/orange-cash.png",
+  etisalat: "/payment/etisalat-cash.png",
+};
+
 export function BookingCheckout({
   vendor,
   locale,
@@ -97,14 +128,16 @@ export function BookingCheckout({
       cardNumber: "",
       cardExpiry: "",
       cardCvc: "",
-      walletProvider: "vodafone",
+      walletProvider: "instapay",
       walletPhone: "",
     },
   });
 
   const eventDate = form.watch("eventDate");
+  const eventType = form.watch("eventType");
   const packageId = form.watch("packageId");
   const paymentMethod = form.watch("paymentMethod");
+  const walletProvider = form.watch("walletProvider");
   const selectedPackage = vendor.packages.find((item) => item.id === packageId);
   const total = selectedPackage?.price ?? vendor.startingPrice;
   const name = localized(vendor.name, locale);
@@ -263,18 +296,33 @@ export function BookingCheckout({
             </section>
 
             <section className="space-y-3 rounded-2xl bg-card p-4 shadow-soft sm:p-5">
-              <Label htmlFor="eventType">{copy.eventType}</Label>
-              <select
-                id="eventType"
-                className="h-10 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm"
-                {...form.register("eventType", { required: true })}
+              <Label htmlFor="eventType" className="font-heading text-lg">
+                {copy.eventType}
+              </Label>
+              <Select
+                value={eventType}
+                onValueChange={(value) =>
+                  form.setValue("eventType", value as EventTypeInput, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  })
+                }
               >
-                {EVENT_TYPES.map((type) => (
-                  <option key={type} value={type}>
-                    {copy.eventTypes[type]}
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger id="eventType" size="lg" className="w-full bg-background">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent position="popper" align="start" className="w-(--radix-select-trigger-width)">
+                  {EVENT_TYPES.map((type) => {
+                    const Icon = EVENT_TYPE_ICONS[type];
+                    return (
+                      <SelectItem key={type} value={type}>
+                        <Icon className="size-4 text-gold" aria-hidden />
+                        {copy.eventTypes[type]}
+                      </SelectItem>
+                    );
+                  })}
+                </SelectContent>
+              </Select>
             </section>
 
             <section className="space-y-3 rounded-2xl bg-card p-4 shadow-soft sm:p-5">
@@ -363,7 +411,7 @@ export function BookingCheckout({
                 id="notes"
                 rows={4}
                 placeholder={copy.notesPlaceholder}
-                className="w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm"
+                className="w-full resize-none rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm"
                 {...form.register("notes")}
               />
             </section>
@@ -421,17 +469,33 @@ export function BookingCheckout({
             <h2 className="font-heading text-lg">{copy.methods.wallet.title}</h2>
             <div className="space-y-2">
               <Label htmlFor="walletProvider">{copy.walletProvider}</Label>
-              <select
-                id="walletProvider"
-                className="h-10 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm"
-                {...form.register("walletProvider")}
+              <Select
+                value={walletProvider}
+                onValueChange={(value) =>
+                  form.setValue("walletProvider", value as WalletProvider, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  })
+                }
               >
-                {WALLET_PROVIDERS.map((provider) => (
-                  <option key={provider} value={provider}>
-                    {copy.wallets[provider]}
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger id="walletProvider" size="lg" className="w-full bg-background">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent position="popper" align="start" className="w-(--radix-select-trigger-width)">
+                  {WALLET_PROVIDERS.map((provider) => (
+                    <SelectItem key={provider} value={provider}>
+                      <img
+                        src={WALLET_LOGOS[provider]}
+                        alt=""
+                        width={32}
+                        height={24}
+                        className="h-6 w-8 shrink-0 rounded-sm object-contain"
+                      />
+                      {copy.wallets[provider]}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="walletPhone">{copy.walletPhone}</Label>
@@ -466,6 +530,10 @@ export function BookingCheckout({
             <div className="flex justify-between gap-3">
               <dt className="text-muted-foreground">{copy.eventDate}</dt>
               <dd className="text-end font-medium">{formatDateKey(eventDate, locale)}</dd>
+            </div>
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">{copy.eventType}</dt>
+              <dd className="text-end font-medium">{copy.eventTypes[eventType]}</dd>
             </div>
             <div className="flex justify-between gap-3">
               <dt className="text-muted-foreground">{copy.package}</dt>

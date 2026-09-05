@@ -198,7 +198,7 @@ export function HeroSearch({ locale, dictionary }: HeroSearchProps) {
                 setLocationError("");
               }}
             >
-              <SelectTrigger className="h-7 w-full border-0 bg-transparent px-0 shadow-none focus-visible:ring-0">
+              <SelectTrigger className="h-7 w-full border-0 bg-transparent px-0 shadow-none hover:border-transparent focus-visible:ring-0 data-[state=open]:border-transparent data-[state=open]:ring-0">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent align="start" position="popper" className="min-w-48">

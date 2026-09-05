@@ -60,5 +60,5 @@ export function walletPhoneOk(value: string) {
   return digits.length >= 10 && digits.length <= 15;
 }
 
-export const WALLET_PROVIDERS = ["vodafone", "orange", "etisalat", "instapay"] as const;
+export const WALLET_PROVIDERS = ["instapay", "vodafone", "orange", "etisalat"] as const;
 export type WalletProvider = (typeof WALLET_PROVIDERS)[number];
