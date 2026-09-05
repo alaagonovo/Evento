@@ -19,6 +19,7 @@ export function CategoryCard({ category }: { category: CategoryCardItem }) {
           alt={category.title}
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 80vw"
+          loading="lazy"
           className="object-cover transition duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/25 to-transparent" />

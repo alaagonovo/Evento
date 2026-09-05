@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 type HeroBackgroundProps = {
   src: string;
@@ -24,24 +25,48 @@ export function HeroBackground({ src, poster }: HeroBackgroundProps) {
       void video.play().catch(() => undefined);
     };
 
-    syncPlayback();
-    motion.addEventListener("change", syncPlayback);
-    return () => motion.removeEventListener("change", syncPlayback);
+    const startWhenVisible = () => {
+      syncPlayback();
+      motion.addEventListener("change", syncPlayback);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        startWhenVisible();
+        observer.disconnect();
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+      motion.removeEventListener("change", syncPlayback);
+    };
   }, []);
 
   return (
-    <video
-      ref={videoRef}
-      className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      poster={poster}
-      aria-hidden
-    >
-      <source src={src} type="video/mp4" />
-    </video>
+    <>
+      <Image
+        src={poster}
+        alt=""
+        fill
+        sizes="100vw"
+        loading="lazy"
+        className="object-cover"
+      />
+      <video
+        ref={videoRef}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-hidden
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+    </>
   );
 }

@@ -489,6 +489,8 @@ export function BookingCheckout({
                         alt=""
                         width={32}
                         height={24}
+                        loading="lazy"
+                        decoding="async"
                         className="h-6 w-8 shrink-0 rounded-sm object-contain"
                       />
                       {copy.wallets[provider]}

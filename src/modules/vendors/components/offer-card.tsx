@@ -32,6 +32,7 @@ export function OfferCard({ offer, locale, dictionary }: OfferCardProps) {
             alt={localized(offer.title, locale)}
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            loading="lazy"
             className="object-cover transition duration-700 group-hover:scale-105"
           />
           <Badge variant="gold" className="absolute top-3 start-3 h-6 px-2.5">

@@ -29,6 +29,7 @@ export function VendorCard({ vendor, locale, dictionary, className }: VendorCard
             alt={localized(vendor.name, locale)}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            loading="lazy"
             className="object-cover transition duration-700 group-hover:scale-105"
           />
           {vendor.verified ? (
