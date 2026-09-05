@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 import { Container } from "@/shared/components/container";
@@ -39,7 +40,16 @@ export function HomeLanding({ locale, dictionary }: HomeLandingProps) {
   return (
     <div>
       <section className="relative isolate min-h-[34rem] overflow-hidden sm:min-h-[40rem]">
-        <HeroBackground src={HERO_VIDEO} poster={HERO_VIDEO_POSTER} />
+        <Image
+          src={HERO_VIDEO_POSTER}
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover"
+        />
+        <HeroBackground src={HERO_VIDEO} />
         <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/55 to-secondary/25" />
         <Container className="relative flex min-h-[34rem] flex-col justify-end gap-8 pb-10 pt-24 sm:min-h-[40rem] sm:pb-14">
           <div className="max-w-2xl text-secondary-foreground">

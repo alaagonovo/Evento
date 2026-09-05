@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 
 type HeroBackgroundProps = {
   src: string;
-  poster: string;
 };
 
-export function HeroBackground({ src, poster }: HeroBackgroundProps) {
+export function HeroBackground({ src }: HeroBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -47,26 +45,16 @@ export function HeroBackground({ src, poster }: HeroBackgroundProps) {
   }, []);
 
   return (
-    <>
-      <Image
-        src={poster}
-        alt=""
-        fill
-        sizes="100vw"
-        loading="lazy"
-        className="object-cover"
-      />
-      <video
-        ref={videoRef}
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        muted
-        loop
-        playsInline
-        preload="none"
-        aria-hidden
-      >
-        <source src={src} type="video/mp4" />
-      </video>
-    </>
+    <video
+      ref={videoRef}
+      className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+      muted
+      loop
+      playsInline
+      preload="none"
+      aria-hidden
+    >
+      <source src={src} type="video/mp4" />
+    </video>
   );
 }
