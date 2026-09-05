@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import { type Dictionary, type Locale } from "@/shared/lib/i18n";
+import { isBeforeMinBookableDate, minBookableDate, toDateKey } from "../lib/booking-notice";
 
 const WEEKDAY_KEYS = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"] as const;
 
@@ -12,23 +13,29 @@ type AvailabilityCalendarProps = {
   bookedDates: string[];
   locale: Locale;
   dictionary: Dictionary;
+  selectedDate?: string | null;
+  onSelectDate?: (date: string) => void;
 };
 
 function toKey(year: number, month: number, day: number) {
-  return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  return toDateKey(new Date(year, month, day));
 }
 
 export function AvailabilityCalendar({
   bookedDates,
   locale,
   dictionary,
+  selectedDate,
+  onSelectDate,
 }: AvailabilityCalendarProps) {
   const booked = useMemo(() => new Set(bookedDates), [bookedDates]);
   const [cursor, setCursor] = useState(() => {
-    const now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), 1);
+    const min = selectedDate && !isBeforeMinBookableDate(selectedDate) ? selectedDate : minBookableDate();
+    const [year, month] = min.split("-").map(Number);
+    return new Date(year ?? new Date().getFullYear(), (month ?? 1) - 1, 1);
   });
-  const [selected, setSelected] = useState<string | null>(null);
+  const [internalSelected, setInternalSelected] = useState<string | null>(selectedDate ?? null);
+  const selected = selectedDate !== undefined ? selectedDate : internalSelected;
 
   const year = cursor.getFullYear();
   const month = cursor.getMonth();
@@ -41,15 +48,10 @@ export function AvailabilityCalendar({
     const first = new Date(year, month, 1);
     const startOffset = (first.getDay() + 1) % 7;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const cells: Array<{ day: number | null; key: string; booked: boolean; past: boolean }> = [];
-    const todayKey = toKey(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      new Date().getDate(),
-    );
+    const cells: Array<{ day: number | null; key: string; booked: boolean; tooSoon: boolean }> = [];
 
     for (let i = 0; i < startOffset; i += 1) {
-      cells.push({ day: null, key: `empty-${i}`, booked: false, past: true });
+      cells.push({ day: null, key: `empty-${i}`, booked: false, tooSoon: true });
     }
 
     for (let day = 1; day <= daysInMonth; day += 1) {
@@ -58,7 +60,7 @@ export function AvailabilityCalendar({
         day,
         key,
         booked: booked.has(key),
-        past: key < todayKey,
+        tooSoon: isBeforeMinBookableDate(key),
       });
     }
 
@@ -104,14 +106,17 @@ export function AvailabilityCalendar({
           }
 
           const isSelected = selected === cell.key;
-          const disabled = cell.booked || cell.past;
+          const disabled = cell.booked || cell.tooSoon;
 
           return (
             <button
               key={cell.key}
               type="button"
               disabled={disabled}
-              onClick={() => setSelected(cell.key)}
+              onClick={() => {
+                onSelectDate?.(cell.key);
+                if (selectedDate === undefined) setInternalSelected(cell.key);
+              }}
               className={cn(
                 "flex aspect-square items-center justify-center rounded-full text-sm transition",
                 disabled && "cursor-not-allowed text-muted-foreground/40 line-through",
@@ -120,7 +125,7 @@ export function AvailabilityCalendar({
                 isSelected && "bg-primary text-primary-foreground hover:bg-primary",
               )}
               aria-pressed={isSelected}
-              aria-label={`${cell.day}, ${cell.booked ? dictionary.vendor.booked : dictionary.vendor.available}`}
+              aria-label={`${cell.day}, ${disabled ? dictionary.vendor.booked : dictionary.vendor.available}`}
             >
               {cell.day}
             </button>

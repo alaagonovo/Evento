@@ -13,11 +13,16 @@ export type Profile = {
 
 export async function getProfileById(userId: string): Promise<Profile | null> {
   const supabase = await createClient();
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("profiles")
     .select("id, role, email, full_name, phone, avatar_url, created_at")
     .eq("id", userId)
     .maybeSingle();
+
+  if (error) {
+    console.error("getProfileById", error.message);
+    return null;
+  }
 
   if (!data) return null;
 

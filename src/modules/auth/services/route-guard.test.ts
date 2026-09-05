@@ -13,6 +13,20 @@ describe("getAuthGateRedirect", () => {
     ).toEqual({ pathname: "/login", search: "?next=%2Fdashboard" });
   });
 
+  it("sends guests from booking to sign in", () => {
+    expect(
+      getAuthGateRedirect({
+        pathname: "/booking/11111111-1111-1111-1111-111111111111",
+        isAuthenticated: false,
+        role: null,
+        vendorStatus: null,
+      }),
+    ).toEqual({
+      pathname: "/login",
+      search: "?next=%2Fbooking%2F11111111-1111-1111-1111-111111111111",
+    });
+  });
+
   it("leaves public pages open for guests", () => {
     expect(
       getAuthGateRedirect({

@@ -12,6 +12,7 @@ export { OffersBrowse } from "./components/offers-browse";
 export { VendorBrowseGrid } from "./components/vendor-browse-grid";
 export { VendorCard } from "./components/vendor-card";
 export { VendorDetailView } from "./components/vendor-detail-view";
+export { AvailabilityCalendar } from "./components/availability-calendar";
 export {
   CATEGORY_IMAGES,
   CITY_SLUGS,

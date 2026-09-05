@@ -82,6 +82,9 @@ export async function listApprovedVendors(input: ListVendorsInput = {}): Promise
   const { data, error } = await query;
 
   if (error || !data) {
+    if (error) {
+      console.error("listApprovedVendors", error.message);
+    }
     return [];
   }
 

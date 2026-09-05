@@ -6,7 +6,7 @@ function matches(path: string, prefix: string) {
 }
 
 export function isProtectedPath(path: string) {
-  return ["/dashboard", "/admin", "/vendor"].some((prefix) => matches(path, prefix));
+  return ["/dashboard", "/admin", "/vendor", "/booking"].some((prefix) => matches(path, prefix));
 }
 
 export function isAuthPagePath(path: string) {

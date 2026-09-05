@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CalendarDays, Check, ChevronDown, MapPin, Search, Sparkles, X } from "lucide-react";
 import { CITY_SLUGS } from "../data/mock";
+import { minBookableDate } from "../lib/booking-notice";
 import { VENDOR_CATEGORY_SLUGS, type VendorCategorySlug } from "../types/category";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
@@ -32,17 +33,6 @@ type HeroSearchProps = {
 
 const ALL_CITIES = "all";
 const NEAR_ME = "near-me";
-const MIN_NOTICE_DAYS = 3;
-
-function addLocalDays(days: number) {
-  const next = new Date();
-  next.setHours(0, 0, 0, 0);
-  next.setDate(next.getDate() + days);
-  const year = next.getFullYear();
-  const month = String(next.getMonth() + 1).padStart(2, "0");
-  const day = String(next.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
 
 function FieldDivider() {
   return <div aria-hidden className="hidden h-8 w-px shrink-0 bg-border/70 lg:block" />;
@@ -53,7 +43,7 @@ export function HeroSearch({ locale, dictionary }: HeroSearchProps) {
   const [categories, setCategories] = useState<VendorCategorySlug[]>([]);
   const [categoryQuery, setCategoryQuery] = useState("");
   const [city, setCity] = useState<string>(ALL_CITIES);
-  const minDate = addLocalDays(MIN_NOTICE_DAYS);
+  const minDate = minBookableDate();
   const [date, setDate] = useState(minDate);
   const [locating, setLocating] = useState(false);
   const [locationError, setLocationError] = useState("");

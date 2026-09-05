@@ -367,6 +367,26 @@ export type Database = {
         Args: { target_vendor_id: string };
         Returns: undefined;
       };
+      respond_to_booking: {
+        Args: {
+          target_booking_id: string;
+          next_status: BookingStatus;
+        };
+        Returns: undefined;
+      };
+      is_admin: {
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
+      profiles_for_vendor_bookings: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          id: string;
+          full_name: string;
+          email: string;
+          phone: string | null;
+        }[];
+      };
     };
     Enums: {
       user_role: UserRole;

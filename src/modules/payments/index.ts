@@ -1,7 +1,16 @@
 ﻿/**
  * Public API for the payments module.
  * Import only from `@/modules/payments`.
- *
- * Paymob integration is intentionally a placeholder until the payments step.
  */
-export {};
+export {
+  WALLET_PROVIDERS,
+  cardholderOk,
+  cvcOk,
+  digitsOnly,
+  expiryOk,
+  formatCardNumber,
+  formatExpiry,
+  luhnOk,
+  walletPhoneOk,
+  type WalletProvider,
+} from "./lib/payment-details";
